@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -41,6 +42,18 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --animate-shine: shine var(--duration) infinite linear;
+  @keyframes shine {
+  0% {
+    background-position: 0% 0%;
+    }
+  50% {
+    background-position: 100% 100%;
+    }
+  to {
+    background-position: 0% 0%;
+    }
+  }
 }
 
 :root {
@@ -119,4 +132,9 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+body {
+  background-color: #001341;
+  font-family: 'Roboto', Arial, sans-serif;
 }
