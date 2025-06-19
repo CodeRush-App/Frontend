@@ -5,7 +5,7 @@ import code from "../../public/code.png";
 import Link from "next/link";
 import { MagicCard } from "@/components/magicui/magic-card";
 
-export default function Home() {
+export default function Homepage() {
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
       <Box sx={{ display: "flex", position: "relative", height: "60vh", width: "100%", alignItems: "center", minHeight: "400px" }}>
@@ -36,7 +36,7 @@ export default function Home() {
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, tempor invidunt ut labore et dolore magna aliquyam erat
           </Box>
           {/* TODO: Link Logic */}
-          <Link href="/home" style={{ color: "white", textDecoration: "underline" }}> Get started </Link>
+          <Link href="/" style={{ color: "white", textDecoration: "underline" }}> Get started </Link>
         </Box>
         <Image src={code} alt="Code" width={450} />
       </Box>
@@ -51,7 +51,7 @@ export default function Home() {
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, tempor invidunt ut labore et dolore magna aliquyam erat
           </Box>
           {/* TODO: Link Logic */}
-          <Link href="/home" style={{ color: "white", textDecoration: "underline" }}> Get started </Link>
+          <Link href="/" style={{ color: "white", textDecoration: "underline" }}> Get started </Link>
         </Box>
       </Box>
 
@@ -64,7 +64,7 @@ export default function Home() {
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, tempor invidunt ut labore et dolore magna aliquyam erat
           </Box>
           {/* TODO: Link Logic */}
-          <Link href="/home" style={{ color: "white", textDecoration: "underline" }}> Get started </Link>
+          <Link href="/" style={{ color: "white", textDecoration: "underline" }}> Get started </Link>
         </Box>
         <Image src={code} alt="Code" width={450} />
       </Box>
@@ -102,9 +102,7 @@ export default function Home() {
             </Box>
           </MagicCard>
         </Paper>
-
       </Box>
-
     </Box>
   );
 }
