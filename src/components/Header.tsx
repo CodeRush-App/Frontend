@@ -6,7 +6,7 @@ import { useState } from "react";
 
 export default function Header() {
   // TODO: Replace with actual authentication logic
-  const [isloggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
 
   return (
@@ -14,7 +14,7 @@ export default function Header() {
       <Toolbar sx={{ justifyContent: "space-between", fontWeight: "bold", pt: 1 }}>
         {/* Left options */}
         <Box sx={{ display: "flex", gap: 6, alignItems: "center", pl: 2 }}>
-          {isloggedIn && (
+          {isLoggedIn && (
             <>
               <Image src={logo} alt="Logo" width={140} height={140} onClick={() => router.push("/dashboard")} />
               <Link color="textPrimary" onClick={() => router.push("/problems")} underline="none">
@@ -34,7 +34,7 @@ export default function Header() {
               </Link>
             </>)}
 
-          {!isloggedIn && (
+          {!isLoggedIn && (
             <>
               <Image src={logo} alt="Logo" width={140} height={140} onClick={() => router.push("/")} />
               <Link color="textPrimary" onClick={() => router.push("/dashboard")} underline="none">
@@ -48,7 +48,7 @@ export default function Header() {
 
         {/* Right options */}
         <Box sx={{ display: "flex", gap: 2, alignItems: "center", pr: 2 }}>
-          {isloggedIn && (
+          {isLoggedIn && (
             <>
               <TextField type="text" id="search" label="Search" variant="outlined" size="small" sx={{ width: "200px" }} />
               <Button variant="text">
@@ -56,7 +56,7 @@ export default function Header() {
               </Button>
               <Avatar alt="User Avatar" src="/avatar.png" sx={{ width: 40, height: 40, cursor: "pointer" }} onClick={() => router.push("/profile")} />
             </>)}
-          {!isloggedIn && (<>
+          {!isLoggedIn && (<>
             <Link color="textPrimary" onClick={() => router.push("/login")} underline="none">
               Log In
             </Link>

@@ -44,6 +44,10 @@ export default function UserRegister() {
     setConfirmPasswordError(password !== confirmPassword)
     setIsAgreedError(!isAgreed);
 
+    if (emailError || passwordError || confirmPasswordError || isAgreedError) {
+      alert("Please fix the errors before proceeding.");
+      return;
+    }
 
     // TODO: Register logic
     console.log(email, username, password, confirmPassword);

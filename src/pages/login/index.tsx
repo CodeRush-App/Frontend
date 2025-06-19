@@ -30,7 +30,7 @@ export default function UserLogin() {
         <TextField error={loginError} id="Email" label="E-Mail" variant="outlined" sx={{ width: "100%" }} onChange={(e) => setEmail(e.target.value)} />
 
         <TextField error={loginError} type="password" id="Password" label="Password" variant="outlined" sx={{ width: "100%", mt: 2 }} onChange={(e) => setPassword(e.target.value)} />
-        {loginError && <Box sx={{ color: "red", alignSelf: "flex-start" }}>Incorrect Password or invalid E-Mail</Box>}
+        {loginError && <Box sx={{ color: "red", alignSelf: "flex-start" }}>Incorrect password or invalid email</Box>}
 
         <Box sx={{ alignSelf: "flex-start", mt: 1 }}>
           <Checkbox onChange={(e) => setRememberMe(e.target.checked)} color="primary" sx={{ pl: 0, pr: 0.5, left: -3, top: -2 }} />
