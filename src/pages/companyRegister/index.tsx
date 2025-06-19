@@ -1,4 +1,4 @@
-import { Autocomplete, Box, Button, Checkbox, Divider, IconButton, Link, Paper, TextField } from "@mui/material";
+import { Autocomplete, Box, Button, Checkbox, Divider, Link, Paper, TextField } from "@mui/material";
 import GoogleIcon from '@mui/icons-material/Google';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -60,6 +60,8 @@ export default function CompanyRegister() {
             <TextField type="text" id="Username" label="Username" variant="outlined" sx={{ width: "100%" }} onChange={(e) => setUsername(e.target.value)} />
 
             <TextField type="email" id="Email" label="E-Mail" variant="outlined" sx={{ width: "100%" }} onChange={(e) => setEmail(e.target.value)} />
+            {emailError && <Box sx={{ color: "red", alignSelf: "flex-start" }}>Invalid email format.</Box>}
+              
           </Box>
 
           <Box sx={{ display: "flex", gap: 2 }}>

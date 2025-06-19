@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, createTheme, Divider, Link, Paper, TextField, ThemeProvider } from "@mui/material";
+import { Box, Button, Checkbox, Divider, Link, Paper, TextField } from "@mui/material";
 import { ShineBorder } from "@/components/magicui/shine-border";
 import { useRouter } from "next/router";
 import { useState } from "react";
