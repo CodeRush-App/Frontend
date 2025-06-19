@@ -5,10 +5,9 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { useRouter } from "next/router";
 import { useState } from "react"
-import "./index.css";
 import { ShineBorder } from "@/components/magicui/shine-border";
 
-export default function Register() {
+export default function UserRegister() {
   const [email, setEmail] = useState<string | undefined>("");
   const [emailError, setEmailError] = useState<boolean>(false);
   const [username, setUsername] = useState<string | undefined>("");
@@ -51,8 +50,8 @@ export default function Register() {
   };
 
   return (
-    <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-      <Paper elevation={3} sx={{ position: "relative", padding: 4, display: "flex", flexDirection: "column", alignItems: "center", minWidth: "500px", top: "10vh" }}>
+    <Box className="radial-background" sx={{ display: "flex", justifyContent: "center", alignItems: "center", position: "absolute", height: "100vh", top: 0, zIndex: -1 }}>
+      <Paper elevation={3} sx={{ position: "relative", padding: 4, display: "flex", flexDirection: "column", alignItems: "center", minWidth: "500px" }}>
         <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} />
 
         <Box sx={{ alignSelf: "flex-start", fontSize: 32, fontWeight: "bold" }}>Sign up</Box>
@@ -89,7 +88,7 @@ export default function Register() {
         </Box>
 
         <Box sx={{ mt: 2 }}>
-          Already have an account? <Link color="primary" onClick={() => router.push("/login")}>Sign in</Link>
+          Already have an account? <Link color="primary" onClick={() => router.push("/userLogin")}>Sign in</Link>
         </Box>
       </Paper>
     </Box>

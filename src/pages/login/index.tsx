@@ -2,13 +2,12 @@ import { Box, Button, Checkbox, createTheme, Divider, Link, Paper, TextField, Th
 import { ShineBorder } from "@/components/magicui/shine-border";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import "./index.css";
 import GoogleIcon from '@mui/icons-material/Google';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
-export default function Login() {
+export default function UserLogin() {
   const [email, setEmail] = useState<string | undefined>("");
   const [password, setPassword] = useState<string | undefined>("");
   const [rememberMe, setRememberMe] = useState<boolean>(false);
@@ -22,8 +21,8 @@ export default function Login() {
   };
 
   return (
-    <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-      <Paper elevation={3} sx={{ position: "relative", padding: 4, display: "flex", flexDirection: "column", alignItems: "center", top: "10vh" }}>
+    <Box className="radial-background" sx={{ display: "flex", justifyContent: "center", alignItems: "center", position: "absolute", height: "100vh", top: 0, zIndex: -1 }}>
+      <Paper elevation={3} sx={{ position: "relative", padding: 4, display: "flex", flexDirection: "column", alignItems: "center" }}>
         <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} />
 
         <Box sx={{ alignSelf: "flex-start", fontSize: 32, fontWeight: "bold", mb: 4 }}>Sign in</Box>
@@ -44,16 +43,16 @@ export default function Login() {
 
         <Divider textAlign="center" sx={{ width: "100%", mt: 2 }}>or</Divider>
 
-        <Button sx={{ width: "100%", mt: 2 }} color="secondary" variant="contained" > <GoogleIcon sx={{mr: 1}}/>Google</Button>
+        <Button sx={{ width: "100%", mt: 2 }} color="secondary" variant="contained" > <GoogleIcon sx={{ mr: 1 }} />Google</Button>
         <Box sx={{ display: "flex", width: "100%", mt: 1, justifyContent: "space-between" }}>
           {/* TODO: Icon click Logic */}
-          <Button sx={{ width: "100%" }} color="secondary" variant="contained" ><GitHubIcon sx={{mr: 1}} /> GitHub</Button>
-          <Button sx={{ width: "100%", ml: 1, mr: 1 }} color="secondary" variant="contained" ><LinkedInIcon sx={{mr: 1}} /> LinkedIn</Button>
-          <Button sx={{ width: "100%" }} color="secondary" variant="contained" ><FacebookIcon sx={{mr: 1}} /> Facebook</Button>
+          <Button sx={{ width: "100%" }} color="secondary" variant="contained" ><GitHubIcon sx={{ mr: 1 }} /> GitHub</Button>
+          <Button sx={{ width: "100%", ml: 1, mr: 1 }} color="secondary" variant="contained" ><LinkedInIcon sx={{ mr: 1 }} /> LinkedIn</Button>
+          <Button sx={{ width: "100%" }} color="secondary" variant="contained" ><FacebookIcon sx={{ mr: 1 }} /> Facebook</Button>
         </Box>
 
         <Box sx={{ mt: 2 }}>
-          Don't have an account? <Link color="primary" onClick={() => router.push("/register")}>Sign up</Link>
+          Don't have an account? <Link color="primary" onClick={() => router.push("/userRegister")}>Sign up</Link>
         </Box>
       </Paper>
     </Box>

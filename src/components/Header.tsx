@@ -11,7 +11,7 @@ export default function Header() {
       <Toolbar sx={{ justifyContent: "space-between", fontWeight: "bold", pt: 1 }}>
         {/* Left options */}
         <Box sx={{ display: "flex", gap: 2, alignItems: "center", pl: 2 }}>
-          <Image src={logo} alt="Logo" width={140} height={140} />
+          <Image src={logo} alt="Logo" width={140} height={140} onClick={() => router.push("/home")} />
           <Link color="textPrimary" onClick={() => router.push("/dashboard")} underline="none">
             Dashboard
           </Link>
@@ -28,7 +28,7 @@ export default function Header() {
             variant="contained"
             color="primary"
             sx={{ fontWeight: "bold" }}
-            onClick={() => router.push("/register")}
+            onClick={() => router.push("/loginSelection")}
           >
             Create an Account
           </Button>

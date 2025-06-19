@@ -54,6 +54,7 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           color: "#E1E6EB",
+          borderColor: "#E1E6EB",
           "&::before, &::after": {
             borderColor: "#FFFFFF",
           },
