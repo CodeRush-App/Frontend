@@ -1,7 +1,6 @@
-"use client"
-import { createTheme, ThemeProvider } from "@mui/material";
+import { createTheme } from "@mui/material";
 
-const theme = createTheme({
+export const theme = createTheme({
   palette: {
     primary: {
       main: "#F62F63",
@@ -64,7 +63,3 @@ const theme = createTheme({
     },
   },
 });
-
-export default function Theme({ children }: { children: React.ReactNode }) {
-  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
-}
