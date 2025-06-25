@@ -1,6 +1,6 @@
+"use client"
 import { Box, Button, Checkbox, Divider, Link, Paper, TextField } from "@mui/material";
 import { ShineBorder } from "@/components/magicui/shine-border";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import GoogleIcon from '@mui/icons-material/Google';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -12,7 +12,6 @@ export default function UserLogin() {
   const [password, setPassword] = useState<string | undefined>("");
   const [rememberMe, setRememberMe] = useState<boolean>(false);
   const [loginError, setLoginError] = useState<boolean>(false);
-  const router = useRouter();
 
   const handleLoginClick = () => {
     // TODO: Login logic
@@ -52,7 +51,7 @@ export default function UserLogin() {
         </Box>
 
         <Box sx={{ mt: 2 }}>
-          Don't have an account? <Link color="primary" onClick={() => router.push("/userRegister")}>Sign up</Link>
+          Don't have an account? <Link color="primary" href="/loginSelection">Sign up</Link>
         </Box>
       </Paper>
     </Box>

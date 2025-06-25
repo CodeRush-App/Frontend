@@ -1,12 +1,8 @@
 import { DotPattern } from "@/components/magicui/dot-pattern";
 import { cn } from "@/lib/utils";
 import { Box, Button, Divider, Link } from "@mui/material";
-import { useRouter } from "next/router";
 
 export default function LoginSelection() {
-  const router = useRouter();
-
-
   return (
     <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
       <DotPattern style={{ position: "absolute", top: 0, left: -5, zIndex: -1 }}
@@ -22,10 +18,10 @@ export default function LoginSelection() {
           Lorem ipsum dolor sit amet, consetetur sadipscing elitr, tempor invidunt ut labore et dolore magna aliquyam erat
         </Box>
         <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-          <Button variant="contained" color="primary" sx={{ mt: 4, mb: 10 }} onClick={() => router.push("/login")}>
+          <Button variant="contained" color="primary" sx={{ mt: 4, mb: 10 }} href="/login">
             Login
           </Button>
-          Don't have an account? <Link color="primary" onClick={() => router.push("/userRegister")}>Sign up</Link>
+          Don't have an account? <Link color="primary" href="/userRegister">Sign up</Link>
         </Box>
       </Box>
 
@@ -39,10 +35,10 @@ export default function LoginSelection() {
           Lorem ipsum dolor sit amet, consetetur sadipscing elitr, tempor invidunt ut labore et dolore magna aliquyam erat
         </Box>
         <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-          <Button variant="contained" color="primary" sx={{ mt: 4, mb: 10 }} onClick={() => router.push("/login")}>
+          <Button variant="contained" color="primary" sx={{ mt: 4, mb: 10 }} href="/login">
             Login
           </Button>
-          Dont have an account? <Link color="primary" onClick={() => router.push("/companyRegister")}>Request access</Link>
+          Dont have an account? <Link color="primary" href="/companyRegister">Request access</Link>
         </Box>
       </Box>
     </Box>

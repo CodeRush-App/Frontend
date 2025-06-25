@@ -1,9 +1,9 @@
+"use client"
 import { Autocomplete, Box, Button, Checkbox, Divider, Link, Paper, TextField } from "@mui/material";
 import GoogleIcon from '@mui/icons-material/Google';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import { useRouter } from "next/router";
 import { useState } from "react"
 import { ShineBorder } from "@/components/magicui/shine-border";
 
@@ -16,7 +16,6 @@ export default function CompanyRegister() {
   const [company, setCompany] = useState<string | undefined>("");
   const [isAgreed, setIsAgreed] = useState<boolean>(false);
   const [isAgreedError, setIsAgreedError] = useState<boolean>(false);
-  const router = useRouter();
 
   const verifyEmail = (email: string) => {
     email = email.trim();
@@ -108,7 +107,7 @@ export default function CompanyRegister() {
         </Box>
 
         <Box sx={{ mt: 2 }}>
-          Already have an account? <Link color="primary" onClick={() => router.push("/userLogin")}>Sign in</Link>
+          Already have an account? <Link color="primary" href="/login">Sign in</Link>
         </Box>
       </Paper>
     </Box>
