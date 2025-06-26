@@ -28,7 +28,7 @@ const theme = createTheme({
             "& fieldset": {
               borderColor: "#27375E",
             },
-            backgroundColor: "#000000",
+            backgroundColor: "#0F172A",
           },
         },
       },
@@ -59,6 +59,27 @@ const theme = createTheme({
           "&::before, &::after": {
             borderColor: "#FFFFFF",
           },
+        },
+      },
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "#27375E",
+        },
+      },
+    },
+    MuiSvgIcon: {
+      styleOverrides: {
+        root: {
+          fill: "#FFFFFF",
+        },
+      },
+    },
+    MuiSelect: {
+      styleOverrides: {
+        outlined: {
+          backgroundColor: "#0F172A", 
         },
       },
     },

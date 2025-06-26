@@ -122,3 +122,15 @@ body {
   width: 100%;
   background-image: radial-gradient(#001341, #0F172A);
 }
+
+h1 {
+  @apply text-2xl font-bold;
+}
+
+h2 {
+  @apply text-xl font-bold;
+}
+
+p {
+  @apply text-lg;
+}
