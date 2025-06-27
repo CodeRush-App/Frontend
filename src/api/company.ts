@@ -25,7 +25,5 @@ export interface UpcomingEvent {
 
 export async function getCompany(companyId: string): Promise<Company> {
   const response = await axiosInstance.get(`/companies/${companyId}`);
-  const response2 = await axiosInstance.get(`/companies`);
-  console.log(response2.data);
   return response.data;
 }

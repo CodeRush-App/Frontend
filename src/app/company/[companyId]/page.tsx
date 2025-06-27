@@ -3,9 +3,9 @@ import { getCompany } from "@/api/company";
 import type { Company } from "@/api/company";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import CompanyHeader from "./CompanyHeader";
-import OpenPositions from "./OpenPositions";
-import UpcomingEvents from "./UpcomingEvents";
+import CompanyHeader from "../../../components/Company/CompanyHeader";
+import OpenPositions from "../../../components/Company/OpenPositions";
+import UpcomingEvents from "../../../components/Company/UpcomingEvents";
 import { Box, Typography } from "@mui/material";
 
 export default function Company() {
@@ -27,9 +27,9 @@ export default function Company() {
   }
 
   return (
-    <Box sx={{ mx: "auto", maxWidth: "md"}}>
+    <Box sx={{ mx: "auto", maxWidth: "md", mt: 15}}>
       <CompanyHeader name={company.name} />
-      <Box mt={8} sx={{ display: "flex", flexDirection: "column", gap: 4}}>
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 4, mt: 4}}>
         <OpenPositions positions={company.openPositions} />
         <UpcomingEvents events={company.upcomingEvents} />
       </Box>
