@@ -6,15 +6,17 @@ export type ProblemFilterProps = {
   onClose: () => void;
   anchorEl: HTMLElement | null;
   filter: {
-    status: string[]; 
-    difficulty: string[]; 
-    successRate: [number, number]; 
+    status: string[];
+    difficulty: string[];
+    successRate: [number, number];
   };
   onFilterChange: (newFilter: ProblemFilterProps['filter']) => void;
+  statusOptions?: string[];
+  difficultyOptions?: string[];
 };
 
-export default function ProblemFilter({ open, onClose, anchorEl, filter, onFilterChange }: ProblemFilterProps) {
-  
+export default function ProblemFilter({ open, onClose, anchorEl, filter, onFilterChange, statusOptions = ["Solved", "Unsolved"], difficultyOptions = ["Easy", "Medium", "Hard"] }: ProblemFilterProps) {
+
   function toggleFilter(category: "status" | "difficulty", value: string) {
     const newFilter = { ...filter };
     if (filter[category].includes(value)) {
@@ -53,8 +55,13 @@ export default function ProblemFilter({ open, onClose, anchorEl, filter, onFilte
           <h3><u>Status</u></h3>
           <FormControl>
             <FormGroup sx={{ flexDirection: "row" }}>
-              <FormControlLabel control={<Checkbox checked={filter.status.includes("Solved")} onChange={() => toggleFilter("status", "Solved")} />} label="Solved" />
-              <FormControlLabel control={<Checkbox checked={filter.status.includes("Unsolved")} onChange={() => toggleFilter("status", "Unsolved")} />} label="Unsolved" />
+              {statusOptions.map((status) => (
+                <FormControlLabel
+                  key={status}
+                  control={<Checkbox checked={filter.status.includes(status)} onChange={() => toggleFilter("status", status)} />}
+                  label={status}
+                />
+              ))}
             </FormGroup>
           </FormControl>
         </Box>
@@ -62,9 +69,13 @@ export default function ProblemFilter({ open, onClose, anchorEl, filter, onFilte
           <h3><u>Difficulty</u></h3>
           <FormControl>
             <FormGroup sx={{ flexDirection: "row" }}>
-              <FormControlLabel control={<Checkbox checked={filter.difficulty.includes("Easy")} onChange={() => toggleFilter("difficulty", "Easy")} />} label="Easy" />
-              <FormControlLabel control={<Checkbox checked={filter.difficulty.includes("Medium")} onChange={() => toggleFilter("difficulty", "Medium")} />} label="Medium" />
-              <FormControlLabel control={<Checkbox checked={filter.difficulty.includes("Hard")} onChange={() => toggleFilter("difficulty", "Hard")} />} label="Hard" />
+              {difficultyOptions.map((difficulty) => (
+                <FormControlLabel
+                  key={difficulty}
+                  control={<Checkbox checked={filter.difficulty.includes(difficulty)} onChange={() => toggleFilter("difficulty", difficulty)} />}
+                  label={difficulty}
+                />
+              ))}
             </FormGroup>
           </FormControl>
         </Box>

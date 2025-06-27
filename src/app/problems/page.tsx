@@ -7,12 +7,11 @@ import { getProblemsSolved, getProgressToNextBadge, getSuccessRate, isProblemSol
 import BronzeBadge from "@/public/bronze.png";
 import { Box, Button, Divider, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 export default function Problems() {
   const [selectedTopic, setSelectedTopic] = useState("All");
   const [problems, setProblems] = useState<Problem[]>([]);
-  const [filteredProblems, setFilteredProblems] = useState<Problem[] | undefined>(undefined);
   const [filter, setFilter] = useState<ProblemFilterProps['filter']>({
     status: [],
     difficulty: [],
@@ -20,44 +19,51 @@ export default function Problems() {
   });
   const [openFilter, setOpenFilter] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
-    // TODO: Show user error
-    getProblems().then((problems) => {
-      setProblems(problems);
-    });
+    getProblems()
+      .then((problems) => {
+        setProblems(problems);
+      })
+      .catch((error) => {
+        // TODO: show error message
+        console.error(error);
+      });
   }, []);
+
+  const filteredProblems = useMemo(() => {
+    let result = problems;
+    // Topic filter
+    if (selectedTopic !== "All") {
+      result = result.filter((problem) => problem.topic === selectedTopic);
+    }
+    // Search filter
+    if (search.trim() !== "") {
+      result = result.filter((problem) => problem.title.toLowerCase().includes(search.toLowerCase()));
+    }
+    // Status, difficulty, success rate filters
+    result = result.filter((problem) => {
+      const isSolved = isProblemSolved(problem);
+      if (filter.status.length && !filter.status.includes(isSolved ? "Solved" : "Unsolved")) return false;
+      if (filter.difficulty.length && !filter.difficulty.includes(problem.difficulty)) return false;
+      const rate = getSuccessRate(problem, problems);
+      if (rate < filter.successRate[0] || rate > filter.successRate[1]) return false;
+      return true;
+    });
+    return result;
+  }, [problems, filter, selectedTopic, search]);
 
   function handleFilterChange(newFilter: ProblemFilterProps['filter']) {
     setFilter(newFilter);
-    const filteredProblems = problems.filter(problem => {
-      const isSolved = isProblemSolved(problem);
-      if (newFilter.status.length && !newFilter.status.includes(isSolved ? "Solved" : "Unsolved")) return false;
-      // Difficulty
-      if (newFilter.difficulty.length && !newFilter.difficulty.includes(problem.difficulty)) return false;
-      // Success Rate
-      const rate = getSuccessRate(problem, problems);
-      if (rate < newFilter.successRate[0] || rate > newFilter.successRate[1]) return false;
-      // Topic
-      if (selectedTopic !== "All" && problem.topic !== selectedTopic) return false;
-      return true;
-    });
-    setFilteredProblems(filteredProblems);
-    console.log(filteredProblems);
   }
 
   function onSelectTopic(event: SelectChangeEvent) {
     setSelectedTopic(event.target.value);
-    if (event.target.value === "All") {
-      setFilteredProblems(undefined);
-    } else {
-      setFilteredProblems(problems.filter((problem) => problem.topic === event.target.value));
-    }
   }
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: 2, px: "15vw", pt: "10vh" }}>
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 4, px: "15vw", pt: "10vh" }}>
       <Box sx={{ display: "flex", gap: 2, backgroundColor: brandColors.dark, borderRadius: 2, p: 2, justifyContent: "space-between" }}>
         <Select variant="outlined" value={selectedTopic} sx={{ minWidth: "200px" }} onChange={onSelectTopic}>
           <MenuItem value="All">All</MenuItem>
@@ -80,11 +86,11 @@ export default function Problems() {
       <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 2 }}>
         <h2>Select a problem</h2>
         <Divider sx={{ flex: 1, borderColor: brandColors.dark, borderWidth: 1, borderRadius: 2 }} />
-        <TextField variant="outlined" label="Search" onChange={(event) => { setFilteredProblems(problems.filter((problem) => problem.title.toLowerCase().includes(event.target.value.toLowerCase()))) }} />
+        <TextField variant="outlined" label="Search" value={search} onChange={(event) => setSearch(event.target.value)} />
         <Button variant="contained" onClick={(event) => { setAnchorEl(event.currentTarget); setOpenFilter(true) }} id="filter-button">Filter</Button>
       </Box>
 
-      <Box sx={{ pr: 2, overflowY: "auto", height: "calc(100vh - 300px)" }}>
+      <Box sx={{ pr: 2, overflowY: "auto", height: "calc(90vh - 300px)" }}>
         <ProblemList problems={filteredProblems || problems} />
       </Box>
       <ProblemFilter

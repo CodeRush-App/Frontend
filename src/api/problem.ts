@@ -17,6 +17,11 @@ export interface Problem {
 }
 
 export const getProblems = async () => {
-  const response = await axiosInstance.get('/problems');
-  return response.data;
+  try {
+    const response = await axiosInstance.get('/problems');
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 };
