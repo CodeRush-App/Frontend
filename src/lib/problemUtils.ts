@@ -20,3 +20,8 @@ export function getSuccessRate(problem: Problem, problems: Problem[]) {
   const percentage = amountOfCompletedSubmissions / amountOfSubmissons;
   return percentage * 100;
 }
+
+// TODO: implement
+export function isProblemSolved(problem: Problem): boolean {
+  return false;
+}
