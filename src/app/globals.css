@@ -122,3 +122,17 @@ body {
   width: 100%;
   background-image: radial-gradient(#001341, #0F172A);
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #27375E;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #F62F63;
+  border-radius: 4px;
+}
