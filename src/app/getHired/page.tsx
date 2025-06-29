@@ -3,11 +3,6 @@ import React, { useEffect, useState } from "react";
 import { Box, Typography, Button, Avatar, Stack, CircularProgress, Divider } from "@mui/material";
 import { getCompanies, Company } from "@/api/company";
 
-const COMPANY_LOGOS: Record<string, string> = {
-  Google: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg",
-  // Add more company logos here if needed
-};
-
 export default function GetHired() {
   const [companies, setCompanies] = useState<Company[]>([]);
   const [loading, setLoading] = useState(true);
@@ -32,7 +27,6 @@ export default function GetHired() {
           Registered companies
         </Typography>
         <Divider sx={{ borderColor: "#27375E", flex: 1, borderRadius: 2, borderWidth: 1 }} />
-        <Button variant="contained" sx={{ fontWeight: 500 }} >Filter</Button>
       </Box>
       {loading ? (
         <Box sx={{ display: "flex", justifyContent: "center", mt: 6 }}>
@@ -54,7 +48,7 @@ export default function GetHired() {
 function CompanyCard({ company }: { company: Company }) {
   return (
     <Box sx={{ bgcolor: "background.paper", borderRadius: 2, display: "flex", alignItems: "center", p: 2, m: 1 }}>
-      <Avatar src={COMPANY_LOGOS[company.name] || undefined} alt={company.name} sx={{ width: 40, height: 40, mr: 2, bgcolor: "#fff" }}>
+      <Avatar alt={company.name} sx={{ width: 40, height: 40, mr: 2, bgcolor: "#fff" }}>
         {company.name[0]}
       </Avatar>
       <Box sx={{ flex: 1, display: "flex", alignItems: "center", gap: 6 }}>
@@ -78,7 +72,7 @@ function CompanyCard({ company }: { company: Company }) {
           </Typography>
         </Box>
         <Box sx={{ flex: 1 }} />
-        <Button variant="contained" color="primary" sx={{ minWidth: 180, fontWeight: 500, borderRadius: 2 }}>
+        <Button variant="contained" color="primary" href={`/company/${company.id}`} sx={{ minWidth: 180, fontWeight: 500, borderRadius: 2 }}>
           View company profile
         </Button>
       </Box>
