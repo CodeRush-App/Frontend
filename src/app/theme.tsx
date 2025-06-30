@@ -41,6 +41,13 @@ const theme = createTheme({
         },
       },
     },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "#27375E",
+        },
+      },
+    },
     MuiButton: {
       styleOverrides: {
         containedSecondary: {
