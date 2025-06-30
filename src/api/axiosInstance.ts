@@ -5,8 +5,7 @@ const axiosInstance = axios.create({
   headers: {
     "bypass-tunnel-reminder": "true",
     Authorization:
-      "Bearer " +
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiaXNBZG1pbiI6dHJ1ZX0.O4TU0HcG1CTkmbjbyrsiXulZy_NC7AVEuBFhVtsFGmM",
+      "Bearer " + process.env.NEXT_PUBLIC_API_TOKEN,
     withCredentials: true,
   },
 });
