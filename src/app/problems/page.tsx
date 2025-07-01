@@ -36,16 +36,12 @@ export default function Problems() {
             setSubmissions(submissions);
             setLoading(false);
           })
-          .catch((error) => {
-            // TODO: show error message in UI instead of just console
-            console.error(error);
+          .catch(() => {
             setError("Failed to load submissions");
             setLoading(false);
           });
       })
-      .catch((error) => {
-        // TODO: show error message in UI instead of just console
-        console.error(error);
+      .catch(() => {
         setError("Failed to load problems");
         setLoading(false);
       });

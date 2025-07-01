@@ -14,11 +14,9 @@ export default function GetHired() {
         setCompanies(data);
         setLoading(false);
       })
-      .catch(err => {
+      .catch(() => {
         setError("Failed to load companies");
         setLoading(false);
-        //TODO: Show error message
-        console.error(err);
       });
   }, []);
 
