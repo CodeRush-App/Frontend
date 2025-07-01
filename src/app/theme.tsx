@@ -53,7 +53,7 @@ const theme = createTheme({
     MuiCard: {
       styleOverrides: {
         root: {
-          backgroundColor: "#27375E",
+          backgroundColor: brandColors.dark,
         },
       },
     },

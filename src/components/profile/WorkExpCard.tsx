@@ -44,7 +44,7 @@ export default function WorkExpCard({ workDrafts, setWorkDrafts, work, index, ed
               label="Position"
               styling={{ color: "text" }}
             />
-            <svg width="20" height="22" viewBox="0 0 2 2" fill="none">
+            <svg width="20" height="22" viewBox="0 0 2 2" fill="none" aria-hidden="true">
               <circle cx="1" cy="1" r="0.4" fill="lightgrey" />
             </svg>
             <InlineTextEdit
@@ -74,7 +74,7 @@ export default function WorkExpCard({ workDrafts, setWorkDrafts, work, index, ed
             />
           </Box>
           <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-            <Typography>Notes:</Typography>
+            <Typography>Notes: </Typography>
             <InlineTextEdit
               value={work.notes}
               onChange={(v: string) => handleWorkChange("notes", v)}

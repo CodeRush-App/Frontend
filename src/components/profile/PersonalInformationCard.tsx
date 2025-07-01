@@ -5,7 +5,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import EditIcon from "@mui/icons-material/Edit";
 import { Box, Card, CardContent, IconButton, Typography } from "@mui/material";
 import { useState } from "react";
-import InlineEdit from "./InlineTextEdit";
+import InlineTextEdit from "./InlineTextEdit";
 
 export default function PersonalInformationCard({ user, setUser }: { user: User, setUser: (user: User) => void }) {
   const [editInfo, setEditInfo] = useState(false);
@@ -30,16 +30,16 @@ export default function PersonalInformationCard({ user, setUser }: { user: User,
         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <Typography sx={{ fontSize: 24, fontWeight: "bold" }}>Personal Information</Typography>
           {editInfo ? (
-            <>
-              <IconButton onClick={handleInfoSave} size="small" sx={{ color: "green" }}>
+            <Box sx={{ display: "flex", gap: 2 }}>
+              <IconButton onClick={handleInfoSave} size="small">
                 <CheckIcon />
               </IconButton>
-              <IconButton onClick={handleInfoCancel} size="small" sx={{ color: "red" }}>
+              <IconButton onClick={handleInfoCancel} size="small">
                 <CloseIcon />
               </IconButton>
-            </>
+            </Box>
           ) : (
-            <IconButton onClick={handleInfoEdit} size="small" sx={{ color: "text.secondary" }}>
+            <IconButton onClick={handleInfoEdit} size="small">
               <EditIcon />
             </IconButton>
           )}
@@ -49,7 +49,7 @@ export default function PersonalInformationCard({ user, setUser }: { user: User,
           <Typography sx={{ fontWeight: 500 }}>Email: {user.email}</Typography>
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <Typography sx={{ fontWeight: 500 }}>Full Name:</Typography>
-            <InlineEdit
+            <InlineTextEdit
               value={infoDraft.name}
               onChange={(v: string) => setInfoDraft(d => ({ ...d, name: v }))}
               editing={editInfo}
@@ -59,7 +59,7 @@ export default function PersonalInformationCard({ user, setUser }: { user: User,
           </Box>
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <Typography sx={{ fontWeight: 500 }}>Phone:</Typography>
-            <InlineEdit
+            <InlineTextEdit
               value={infoDraft.phoneNumber}
               onChange={(v: string) => setInfoDraft(d => ({ ...d, phoneNumber: v }))}
               editing={editInfo}
@@ -69,7 +69,7 @@ export default function PersonalInformationCard({ user, setUser }: { user: User,
           </Box>
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <Typography sx={{ fontWeight: 500 }}>Country:</Typography>
-            <InlineEdit
+            <InlineTextEdit
               value={infoDraft.country}
               onChange={(v: string) => setInfoDraft(d => ({ ...d, country: v }))}
               editing={editInfo}

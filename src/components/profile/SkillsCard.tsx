@@ -1,5 +1,6 @@
 "use client"
 import { updateUser, User } from "@/api/user";
+import { brandColors } from "@/app/theme";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import EditIcon from "@mui/icons-material/Edit";
@@ -53,7 +54,7 @@ export default function SkillsCard({ user, setUser }: { user: User, setUser: (us
               onMouseEnter={() => setHoverSkill(skill)}
               onMouseLeave={() => setHoverSkill(null)}
               deleteIcon={editSkills && hoverSkill === skill ? <CloseIcon /> : undefined}
-              sx={{ bgcolor: "#000000" }}
+              sx={{ bgcolor: brandColors.darkest }}
             />
           ))}
           {editSkills && (

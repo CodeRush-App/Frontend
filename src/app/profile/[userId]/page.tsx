@@ -7,12 +7,12 @@ import WorkExpCard from "@/components/profile/WorkExpCard";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import { Box, Card, CardContent, CircularProgress, Divider, IconButton, Tooltip, Typography } from "@mui/material";
-import { CheckIcon } from "lucide-react";
+import CheckIcon from "@mui/icons-material/Check";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const BADGE_DESCRIPTIONS: Record<string, string> = {
-  "Problem solving": "Awarded for excellent problem-solving skills.",
+  "Problem solver": "Awarded for excellent problem-solving skills.",
   "C++": "Expertise in C++ programming.",
   "Dueller": "Defeated 100 opponents in coding battles.",
 };
