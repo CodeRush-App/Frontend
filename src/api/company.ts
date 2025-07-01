@@ -1,9 +1,9 @@
 import axiosInstance from "./axiosInstance";
 
 export interface Company {
-  id: string;
+  id?: string;
   name: string;
-  size: string;
+  size?: string;
   country: string;
   managedBy: string;
   openPositions: OpenPosition[];
@@ -30,5 +30,13 @@ export async function getCompany(companyId: string): Promise<Company> {
 
 export async function getCompanies(): Promise<Company[]> {
   const response = await axiosInstance.get(`/companies`);
+  return response.data;
+}
+
+export async function updateCompany(companyId: string, company: Company): Promise<Company> {
+  const updatedCompany = { ...company };
+  delete updatedCompany.id;
+  delete updatedCompany.size;
+  const response = await axiosInstance.put(`/companies/${companyId}`, updatedCompany);
   return response.data;
 }
