@@ -27,7 +27,7 @@ export default function Company() {
   }
 
   return (
-    <Box sx={{ mx: "auto", maxWidth: "md", mt: 15}}>
+    <Box>
       <CompanyHeader name={company.name} />
       <Box sx={{ display: "flex", flexDirection: "column", gap: 4, mt: 4}}>
         <OpenPositions positions={company.openPositions} />
