@@ -86,10 +86,10 @@ export default function Dashboard() {
       <Box>
         <Box sx={{ display: "grid", gridTemplateColumns: "repeat(3, 5fr)", gap: "2px" }}>
           {(() => {
-            const uniqueTopics = Array.from(new Set(problems.map(p => p.topic)));
+            const topics = ["Algorithms", "Data Structures", "Math", "Artificial Intelligence", "C", "C++", "Java","Python","Ruby","SQL","Databases","Linux Shell","Funcaiton Programming","Regex","React"]
             const gridSlots = 15; // 5 rows x 3 columns
             return Array.from({ length: gridSlots }).map((_, idx) => {
-              const topic = uniqueTopics[idx];
+              const topic = topics[idx];
               return (
                 <Box
                   key={idx}
@@ -106,6 +106,7 @@ export default function Dashboard() {
                     minHeight: 64,
                     cursor: topic ? "pointer" : "default",
                     transition: "background 0.2s",
+                    fontWeight: "bold",
                     '&:hover': topic ? { backgroundColor: '#31457a' } : {},
                   }}
                   component={topic ? Link : 'div'}
