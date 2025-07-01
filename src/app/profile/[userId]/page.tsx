@@ -36,7 +36,7 @@ export default function Profile() {
     });
   }, [userId]);
 
-  if (loading || !user) return <CircularProgress  />;
+  if (loading || !user) return <CircularProgress sx={{ ml: "50%" }} />;
 
   const handleWorkAdd = () => {
     setWorkDrafts([...workDrafts, { position: " ", company: " ", start: " ", end: " ", location: " ", notes: " " }]);
