@@ -3,7 +3,6 @@ import { brandColors } from "@/app/theme";
 import { getSuccessRate } from "@/lib/problemUtils";
 import { Box, Button } from "@mui/material";
 import { memo, useMemo } from "react";
-import { Submission } from "@/api/submission";
 
 export default function ProblemList({ problems }: { problems: Problem[] }) {
   const tagColors = useMemo(

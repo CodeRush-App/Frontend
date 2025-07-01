@@ -1,7 +1,6 @@
 "use client"
 import { getProblems, Problem } from "@/api/problem";
 import { getSubmissions, Submission } from "@/api/submission";
-import { getUser, User } from "@/api/user";
 import { brandColors } from "@/app/theme";
 import ProblemFilter, { ProblemFilterProps } from "@/components/Problem/ProblemFilter";
 import ProblemList from "@/components/Problem/ProblemList";
