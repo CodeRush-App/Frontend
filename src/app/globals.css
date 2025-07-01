@@ -123,6 +123,14 @@ body {
   background-image: radial-gradient(#001341, #0F172A);
 }
 
+h2 {
+  @apply text-2xl font-bold;
+}
+
+h3 {
+  @apply text-lg;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
