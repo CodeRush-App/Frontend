@@ -1,5 +1,5 @@
 "use client"
-import { Button, Card, CardContent, Divider, MenuItem, Select, TextField } from "@mui/material";
+import { Button, Card, CardContent, Divider, MenuItem, Select, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 
 // TODO: Implement
@@ -14,7 +14,7 @@ export default function BattleQueue() {
           <MenuItem value="Topic2">Topic2</MenuItem>
         </Select>
         <Button variant="contained">Queue for battle</Button>
-        <Divider>or</Divider>
+        <Divider><Typography>or</Typography></Divider>
         <TextField variant="outlined" label="Enter a username" />
         <Button variant="contained">Challenge user</Button>
       </CardContent>

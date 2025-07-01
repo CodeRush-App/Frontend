@@ -12,12 +12,12 @@ export default function TopicBadge({ problems, submissions, selectedTopic }: { p
     <Card sx={{ padding: 2, position: "relative" }}>
       <ScoreBadge score={progressToNextBadge[1]} style={{ position: "absolute", top: 0, right: 0 }}/>
       <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <h1><u>{selectedTopic}</u></h1>
+        <Typography sx={{ fontWeight: "bold", fontSize: 24, textDecoration: "underline" }}>{selectedTopic}</Typography>
       </Box>
-      <p>Problems solved:</p>
-      <p><b>{problemsSolved.length} / {problems.filter((problem) => problem.topic === selectedTopic).length}</b></p>
-      <p>Progress to next badge:</p>
-      <Typography sx={{ fontWeight: "bold" }}>{progressToNextBadge[0]}% - {progressToNextBadge[1]} / {progressToNextBadge[2]}</Typography>
+      <Typography>Problems solved</Typography>
+      <Typography>{problemsSolved.length} / {problems.filter((problem) => problem.topic === selectedTopic).length}</Typography>
+      <Typography>Progress to next badge</Typography>
+      <Typography>{progressToNextBadge[0]}% - {progressToNextBadge[1]} / {progressToNextBadge[2]}</Typography>
     </Card>
   );
 }

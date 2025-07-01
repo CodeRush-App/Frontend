@@ -2,7 +2,7 @@ import { UserScore } from "@/api/user";
 
 export function getUserRank(userId: string, userScore: UserScore[]): number {
   return (
-    userScore
+    [...userScore]
       .sort((a, b) => b.elo - a.elo)
       .findIndex((user) => user.id === userId) + 1
   );

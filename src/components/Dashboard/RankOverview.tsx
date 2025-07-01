@@ -10,10 +10,14 @@ export default function RankOverview({ user }: { user: User | null }) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    getUserScore().then(setUserScore).catch((err) => {
-      setError(err.message);
-    });
-    setLoading(false);
+    getUserScore()
+      .then(setUserScore)
+      .catch((err) => {
+        setError(err.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
   if (loading || !user) {
