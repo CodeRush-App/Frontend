@@ -1,6 +1,7 @@
-import { AppBar, Avatar, Box, Button, Link, TextField, Toolbar } from "@mui/material";
+import { AppBar, Avatar, Box, Button, IconButton, Link, TextField, Toolbar } from "@mui/material";
 import Image from "next/image";
 import logo from "@/public/logo.png";
+import NotificationsIcon from '@mui/icons-material/Notifications';
 
 export default function Header({ isLoggedIn }: { isLoggedIn?: boolean }) {
   // TODO: Replace with actual authentication logic
@@ -51,9 +52,9 @@ export default function Header({ isLoggedIn }: { isLoggedIn?: boolean }) {
           {isLoggedIn && (
             <>
               <TextField type="text" id="search" label="Search" variant="outlined" size="small" sx={{ width: "200px" }} />
-              <Button variant="text">
-                TODO: BELL
-              </Button>
+              <IconButton>
+                <NotificationsIcon />
+              </IconButton>
               <Avatar alt="User Avatar" src="/avatar.png" sx={{ width: 40, height: 40, cursor: "pointer" }} component={Link} href="/profile" />
             </>)}
           {!isLoggedIn && (<>

@@ -11,7 +11,7 @@ export function getProgressToNextBadge(topic: string | null, problems: Problem[]
   const topicProblems = problems.filter((problem) => problem.topic === topic);
   const solvedProblems = getProblemsSolved(topicProblems, submissions);
   const solvedScore = solvedProblems.reduce((acc, problem) => acc + getScoreForProblem(problem), 0);
-  const scoreToNextBadge = solvedScore < 1000 ? 1000 : solvedScore < 2000 ? 2000 : solvedScore < 3000 ? 3000 : 0;
+  const scoreToNextBadge = solvedScore < 1000 ? 1000 : solvedScore < 2000 ? 2000 : solvedScore < 3000 ? 3000 : Infinity;
 
   const percentage = (solvedScore / scoreToNextBadge * 100).toFixed(2);
   return [Number(percentage), solvedScore, scoreToNextBadge];
