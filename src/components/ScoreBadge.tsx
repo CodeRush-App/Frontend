@@ -4,8 +4,9 @@ import Gold from "@/public/badges/gold.png";
 import Diamond from "@/public/badges/diamond.png";
 import Image from "next/image";
 import { getBadgeFromScore } from "@/lib/problemUtils";
+import { CSSProperties } from "react";
 
-export default function ScoreBadge({ score, style }: { score: number, style?: any }) {
+export default function ScoreBadge({ score, style }: { score: number, style?: CSSProperties }) {
   const badge = getBadgeFromScore(score);
   return (
     <>
