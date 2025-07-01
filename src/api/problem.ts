@@ -16,12 +16,16 @@ export interface Problem {
   updatedAt: string;
 }
 
-export const getProblems = async () => {
-  try {
-    const response = await axiosInstance.get('/problems');
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
+/**
+ * Fetches all problems from the API.
+ * @returns {Promise<Problem[]>} Array of problems
+ */
+export const getProblems = async (): Promise<Problem[]> => {
+  const response = await axiosInstance.get<Problem[]>("/problems");
+  return response.data;
+};
+
+export const getProblem = async (problemId: string): Promise<Problem> => {
+  const response = await axiosInstance.get<Problem>(`/problems/${problemId}`);
+  return response.data;
 };
