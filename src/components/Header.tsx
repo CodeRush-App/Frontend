@@ -28,7 +28,7 @@ export default function Header({ isLoggedIn }: { isLoggedIn?: boolean }) {
               <Link color="textPrimary" href="/leaderboards" underline="none">
                 Leaderboards
               </Link>
-              <Link color="textPrimary" href="/gethired" underline="none">
+              <Link color="textPrimary" href="/getHired" underline="none">
                 Get hired
               </Link>
             </>)}
@@ -52,10 +52,12 @@ export default function Header({ isLoggedIn }: { isLoggedIn?: boolean }) {
           {isLoggedIn && (
             <>
               <TextField type="text" id="search" label="Search" variant="outlined" size="small" sx={{ width: "200px" }} />
+              {/* TODO: Implement functions */}
               <IconButton>
                 <NotificationsIcon />
               </IconButton>
-              <Avatar alt="User Avatar" src="/avatar.png" sx={{ width: 40, height: 40, cursor: "pointer" }} component={Link} href="/profile" />
+              {/* TODO: Replace with actual user ID and avatar */}
+              <Avatar alt="User Avatar" src="/avatar.png" sx={{ width: 40, height: 40, cursor: "pointer" }} component={Link} href="/profile/68594614c973259bbe213684" />
             </>)}
           {!isLoggedIn && (<>
             <Link color="textPrimary" href="/login" underline="none">

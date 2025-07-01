@@ -6,7 +6,7 @@ import SkillsCard from "@/components/profile/SkillsCard";
 import WorkExpCard from "@/components/profile/WorkExpCard";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
-import { Box, Card, CardContent, Divider, IconButton, Tooltip, Typography } from "@mui/material";
+import { Box, Card, CardContent, CircularProgress, Divider, IconButton, Tooltip, Typography } from "@mui/material";
 import { CheckIcon } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -36,7 +36,7 @@ export default function Profile() {
     });
   }, [userId]);
 
-  if (loading || !user) return <Typography>Loading...</Typography>;
+  if (loading || !user) return <CircularProgress  />;
 
   const handleWorkAdd = () => {
     setWorkDrafts([...workDrafts, { position: " ", company: " ", start: " ", end: " ", location: " ", notes: " " }]);
@@ -76,7 +76,7 @@ export default function Profile() {
   };
 
   return (
-    <Box sx={{ maxWidth: 1200, mx: "auto", mt: 15, display: "flex", flexDirection: "column", gap: 2 }}>
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mb: "5vh" }}>
       <Box sx={{ display: "flex", justifyContent: "space-between", gap: 2 }}>
         {/* Personal Info */}
         <PersonalInformationCard user={user} setUser={setUser} />
@@ -176,6 +176,11 @@ export default function Profile() {
         <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 2 }}>
           <Typography sx={{ fontWeight: 600, fontSize: 24 }}>Certifications</Typography>
           <Divider sx={{ flex: 1, borderRadius: 2, borderWidth: 1, borderColor: "#27375E" }} />
+        </Box>
+        <Box>
+          <Box sx={{ width: 120, height: 120, bgcolor: "#27375E", borderRadius: 2 }}>
+            <Typography sx={{ fontWeight: 600, fontSize: 18, color: "#fff" }}>TODO: Add</Typography>
+          </Box>
         </Box>
       </Box>
     </Box >
