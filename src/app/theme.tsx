@@ -50,6 +50,13 @@ const theme = createTheme({
         },
       },
     },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          backgroundColor: brandColors.dark,
+        },
+      },
+    },
     MuiButton: {
       styleOverrides: {
         containedSecondary: {
