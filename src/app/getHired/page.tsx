@@ -17,13 +17,15 @@ export default function GetHired() {
       .catch(err => {
         setError("Failed to load companies");
         setLoading(false);
+        //TODO: Show error message
+        console.error(err);
       });
   }, []);
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", maxWidth: "80vw", margin: "auto", mt: 10, gap: 5 }}>
-      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 4 }}>
-        <Typography variant="h6" color="text.primary" sx={{ fontWeight: 500 }}>
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
+      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 2 }}>
+        <Typography color="text.primary" sx={{ fontWeight: "bold", fontSize: 24 }}>
           Registered companies
         </Typography>
         <Divider sx={{ borderColor: "#27375E", flex: 1, borderRadius: 2, borderWidth: 1 }} />
@@ -52,14 +54,14 @@ function CompanyCard({ company }: { company: Company }) {
         {company.name[0]}
       </Avatar>
       <Box sx={{ flex: 1, display: "flex", alignItems: "center", gap: 6 }}>
-        <Typography variant="subtitle1" fontWeight={600} color="text.primary" sx={{ minWidth: 100 }}>
+        <Typography variant="subtitle1" color="text.primary" sx={{ minWidth: 100, fontWeight: "bold" }}>
           {company.name}
         </Typography>
         <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
           <Typography variant="body2" color="text.secondary" sx={{ fontSize: 14 }}>
             Open positions
           </Typography>
-          <Typography variant="body2" color="text.primary" sx={{ fontWeight: 500, fontSize: 15 }}>
+          <Typography variant="body2" color="text.primary" sx={{ fontWeight: "bold", fontSize: 15 }}>
             {company.openPositions.length}
           </Typography>
         </Box>
@@ -67,12 +69,12 @@ function CompanyCard({ company }: { company: Company }) {
           <Typography variant="body2" color="text.secondary" sx={{ fontSize: 14 }}>
             Company size
           </Typography>
-          <Typography variant="body2" color="text.primary" sx={{ fontWeight: 400, fontSize: 15 }}>
+          <Typography variant="body2" color="text.primary" sx={{ fontWeight: "bold", fontSize: 15 }}>
             {company.size}
           </Typography>
         </Box>
         <Box sx={{ flex: 1 }} />
-        <Button variant="contained" color="primary" href={`/company/${company.id}`} sx={{ minWidth: 180, fontWeight: 500, borderRadius: 2 }}>
+        <Button variant="contained" color="primary" href={`/company/${company.id}`} sx={{ minWidth: 180, fontWeight: "bold", borderRadius: 2 }}>
           View company profile
         </Button>
       </Box>
