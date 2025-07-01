@@ -37,7 +37,7 @@ const theme = createTheme({
             "& fieldset": {
               borderColor: brandColors.dark,
             },
-            backgroundColor: "#000000",
+            backgroundColor: brandColors.darkest,
           },
         },
       },

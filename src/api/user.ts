@@ -33,6 +33,14 @@ export interface User {
   providerId?: string;
 }
 
+export interface UserScore {
+  id: string;
+  username: string;
+  score: number;
+  elo: number;
+  country: string;
+}
+
 export async function getUser(userId: string): Promise<User> {
   const response = await axiosInstance.get(`/users/${userId}`);
   return response.data;
@@ -57,5 +65,10 @@ export async function updateUser(user: User): Promise<User> {
     `/users/${user.id}`,
     userWithoutUnallowedFields
   );
+  return response.data;
+}
+
+export async function getUserScore(): Promise<UserScore[]> {
+  const response = await axiosInstance.get(`/users/scores`);
   return response.data;
 }
