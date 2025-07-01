@@ -1,10 +1,19 @@
 "use client"
 import { createTheme, ThemeProvider } from "@mui/material";
 
+export const brandColors = {
+  brand: "#F62F63",
+  darkest: "#0F172A",
+  dark: "#27375E",
+  mid: "#ABB8C9",
+  light: "#E1E6EB",
+  lightest: "#FFFFFF",
+}
+
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#F62F63",
+      main: brandColors.brand,
       contrastText: "#000000",
     },
     secondary: {
@@ -13,11 +22,11 @@ const theme = createTheme({
     },
     text: {
       primary: "#FFFFFF",
-      secondary: "#ABB8C9",
+      secondary: brandColors.mid,
     },
     background: {
-      default: "#001341",
-      paper: "#27375E",
+      default: brandColors.darkest,
+      paper: brandColors.dark,
     },
   },
   components: {
@@ -26,7 +35,7 @@ const theme = createTheme({
         root: {
           "& .MuiOutlinedInput-root": {
             "& fieldset": {
-              borderColor: "#27375E",
+              borderColor: brandColors.dark,
             },
             backgroundColor: "#000000",
           },
@@ -51,21 +60,35 @@ const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         containedSecondary: {
-          border: "2px solid #27375E",
+          border: "2px solid " + brandColors.dark,
         },
         outlinedSecondary: {
-          border: "2px solid #27375E",
+          border: "2px solid " + brandColors.dark,
         },
       },
     },
     MuiDivider: {
       styleOverrides: {
         root: {
-          color: "#E1E6EB",
-          borderColor: "#E1E6EB",
+          color: brandColors.light,
+          borderColor: brandColors.light,
           "&::before, &::after": {
             borderColor: "#FFFFFF",
           },
+        },
+      },
+    },
+    MuiSvgIcon: {
+      styleOverrides: {
+        root: {
+          fill: "#FFFFFF",
+        },
+      },
+    },
+    MuiSelect: {
+      styleOverrides: {
+        outlined: {
+          backgroundColor: brandColors.darkest,
         },
       },
     },
