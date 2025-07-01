@@ -5,7 +5,7 @@ import { Box, Button } from "@mui/material";
 import { memo, useMemo } from "react";
 import { Submission } from "@/api/submission";
 
-export default function ProblemList({ problems, submissions }: { problems: Problem[]; submissions: Submission[] }) {
+export default function ProblemList({ problems }: { problems: Problem[] }) {
   const tagColors = useMemo(
     () => [
       "#FFC107", "#FF9800", "#FF69B4", "#8BC34A", "#4CAF50", "#009688", "#00BCD4", "#03A9F4", "#2196F3", "#3F51B5",
@@ -44,7 +44,6 @@ export default function ProblemList({ problems, submissions }: { problems: Probl
       {problems.map((problem) => (
         <ProblemListElement
           key={problem.id}
-          submissions={submissions}
           problem={problem}
           getTagColor={getTagColor}
           getDifficultyColor={getDifficultyColor}
@@ -54,7 +53,7 @@ export default function ProblemList({ problems, submissions }: { problems: Probl
   );
 }
 
-const ProblemListElement = memo(function ProblemListElement({ problem, submissions, getTagColor, getDifficultyColor }: { problem: Problem; submissions: Submission[]; getTagColor: (tag: string) => string; getDifficultyColor: (difficulty: string) => string }) {
+const ProblemListElement = memo(function ProblemListElement({ problem, getTagColor, getDifficultyColor }: { problem: Problem; getTagColor: (tag: string) => string; getDifficultyColor: (difficulty: string) => string }) {
   return (
     <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 2, backgroundColor: brandColors.dark, padding: 2, borderRadius: 2 }}>
       <Box>
@@ -72,7 +71,7 @@ const ProblemListElement = memo(function ProblemListElement({ problem, submissio
         <p>
           <span style={{ color: getDifficultyColor(problem.difficulty) }}>{problem.difficulty}</span>
           <span>, {problem.topic}</span>
-          <span>, Success Rate: {getSuccessRate(problem, submissions)}%</span>
+          <span>, Success Rate: {getSuccessRate()}%</span>
         </p>
       </Box>
       <Button variant="contained" href={`/problems/${problem.slug}`}>Solve Problem</Button>

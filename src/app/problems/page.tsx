@@ -25,7 +25,6 @@ export default function Problems() {
   const [filter, setFilter] = useState<ProblemFilterProps['filter']>(FILTER_INITIAL_STATE);
   const [openFilter, setOpenFilter] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     getProblems()
@@ -44,15 +43,6 @@ export default function Problems() {
         // TODO: show error message in UI instead of just console
         console.error(error);
       });
-    //TODO: get current user id
-    getUser("68594614c973259bbe213684")
-      .then((user) => {
-        setUser(user);
-      })
-      .catch((error) => {
-        // TODO: show error message in UI instead of just console
-        console.error(error);
-      });
   }, []);
 
   const filteredProblems = useMemo(() => {
@@ -64,7 +54,7 @@ export default function Problems() {
       const isSolved = isProblemSolved(problem, submissions);
       if (filter.status.length && !filter.status.includes(isSolved ? "Solved" : "Unsolved")) return false;
       if (filter.difficulty.length && !filter.difficulty.includes(problem.difficulty)) return false;
-      const rate = getSuccessRate(problem, submissions);
+      const rate = getSuccessRate();
       if (rate < filter.successRate[0] || rate > filter.successRate[1]) return false;
       return true;
     });
@@ -89,7 +79,7 @@ export default function Problems() {
   }, []);
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: 4, px: "15vw", pt: "10vh" }}>
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
       <Box sx={{ display: "flex", gap: 2, backgroundColor: brandColors.dark, borderRadius: 2, p: 2, justifyContent: "space-between" }}>
         <Select variant="outlined" value={selectedTopic} sx={{ minWidth: "200px" }} onChange={onSelectTopic}>
           <MenuItem value={ALL_TOPICS}>All</MenuItem>
@@ -100,16 +90,16 @@ export default function Problems() {
           ))}
         </Select>
         <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
-          <p>Problems solved: {getProblemsSolved(problems, submissions).length} / {filteredProblems?.length || problems.length || 0}</p>
+          <p>Problems solved: {getProblemsSolved(problems, submissions, selectedTopic).length} / {filteredProblems?.length || problems.length || 0}</p>
           {selectedTopic !== "All" &&
             <>
               <Box sx={{ display: "flex", flexDirection: "column", ml: 2, mr: 2 }}>
                 <p>Progess to next badge:</p>
                 <p>{
-                  getProgressToNextBadge(selectedTopic, user, problems, submissions)[0]}% - {getProgressToNextBadge(selectedTopic, user, problems, submissions)[1]} / {getProgressToNextBadge(selectedTopic, user, problems, submissions)[2]
+                  getProgressToNextBadge(selectedTopic, problems, submissions)[0]}% - {getProgressToNextBadge(selectedTopic, problems, submissions)[1]} / {getProgressToNextBadge(selectedTopic, problems, submissions)[2]
                   }</p>
               </Box>
-              <ScoreBadge score={getProgressToNextBadge(selectedTopic, user, problems, submissions)[1]} />
+              <ScoreBadge score={getProgressToNextBadge(selectedTopic, problems, submissions)[1]} />
             </>
           }
         </Box>
@@ -123,8 +113,8 @@ export default function Problems() {
         </IconButton>
       </Box>
 
-      <Box sx={{ pr: 2, overflowY: "auto", height: "calc(90vh - 300px)" }}>
-        <ProblemList problems={filteredProblems || problems} submissions={submissions} />
+      <Box sx={{ pr: 2, overflowY: "auto", height: "calc(80vh - 300px)" }}>
+        <ProblemList problems={filteredProblems || problems} />
       </Box>
       <ProblemFilter
         open={openFilter}

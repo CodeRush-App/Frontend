@@ -1,7 +1,7 @@
-import Bronze from "@/public/bronze.png";
-import Silver from "@/public/silver.png";
-import Gold from "@/public/gold.png";
-import Diamond from "@/public/diamond.png";
+import Bronze from "@/public/badges/bronze.png";
+import Silver from "@/public/badges/silver.png";
+import Gold from "@/public/badges/gold.png";
+import Diamond from "@/public/badges/diamond.png";
 import Image from "next/image";
 import { getBadgeFromScore } from "@/lib/problemUtils";
 
