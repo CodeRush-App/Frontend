@@ -32,9 +32,11 @@ export default function OpenPositions({ positions, onChangePositions }: OpenPosi
     const updated = [...localPositions];
     if (field === 'qualifications' && typeof value === 'string') {
       updated[idx][field] = value.split(',').map((q) => q.trim());
-    } else {
-      // @ts-ignore
+    } else if (field !== 'qualifications' && typeof value === 'string') {
       updated[idx][field] = value;
+    } else {
+      console.error(`Invalid value type for field ${field}:`, value);
+      return;
     }
     setLocalPositions(updated);
   };

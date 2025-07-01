@@ -28,7 +28,7 @@ export default function Header({ isLoggedIn }: { isLoggedIn?: boolean }) {
               <Link color="textPrimary" href="/leaderboards" underline="none">
                 Leaderboards
               </Link>
-              <Link color="textPrimary" href="/getHired" underline="none">
+              <Link color="textPrimary" href="/gethired" underline="none">
                 Get hired
               </Link>
             </>)}
