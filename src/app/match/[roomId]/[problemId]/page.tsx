@@ -16,7 +16,6 @@ export default function MatchPage() {
   const [loading, setLoading] = useState(true);
   const [submissionLoading, setSubmissionLoading] = useState(false);
   const [testResults, setTestResults] = useState<Judge0Submission | null>(null);
-  const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [disableSubmit, setDisableSubmit] = useState(false);
   const [timeLeft, setTimeLeft] = useState(300);
@@ -103,7 +102,7 @@ export default function MatchPage() {
       {disableSubmit && !matchResult && <Typography sx={{ textAlign: "center", fontWeight: "bold", fontSize: 18 }}>Waiting for other user to submit...</Typography>}
       {matchResult && <Typography sx={{ textAlign: "center", fontWeight: "bold", fontSize: 24 }}>{matchResult ? "You won!" : "You lost."}</Typography>}
       <Box sx={{ display: "flex", gap: 4 }}>
-        <ProblemCard problem={problem} submissions={submissions} disableOptions />
+        <ProblemCard problem={problem} disableOptions />
         <EditorCard problem={problem} passTestResults={setTestResults} passLoading={setSubmissionLoading} disableSubmit={disableSubmit} setDisableSubmit={setDisableSubmit} pvp />
       </Box>
       <Box sx={{ alignSelf: "flex-end" }}>
