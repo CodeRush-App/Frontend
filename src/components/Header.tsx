@@ -55,10 +55,10 @@ export default async function Header() {
           {isLoggedIn && (
             <>
               <TextField type="text" id="search" label="Search" variant="outlined" size="small" sx={{ width: "200px" }} />
-              <Button color="textPrimary">
+              <Button color="inherit">
                 <NotificationsIcon />
               </Button>
-              <Link color="textPrimary" href="/profile">
+              <Link color="inherit" href="/profile">
                 <AccountCircleIcon fontSize="large" />
               </Link>
             </>)}
