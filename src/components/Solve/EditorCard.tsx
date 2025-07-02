@@ -14,12 +14,18 @@ export default function EditorCard({
   passLoading,
   passSubmission,
   problem,
+  disableSubmit,
+  setDisableSubmit,
+  pvp
 }: {
   passLanguage?: (language: string) => void;
   passTestResults?: (testResults: Judge0Submission) => void;
   passLoading?: (loading: boolean) => void;
   passSubmission?: (submission: Submission) => void;
   problem: Problem;
+  disableSubmit?: boolean;
+  setDisableSubmit?: (disableSubmit: boolean) => void;
+  pvp?: boolean;
 }) {
   const [code, setCode] = useState(getDefaultCode(LANGUAGES[0].value, problem));
   const [runLoading, setRunLoading] = useState(false);
@@ -31,12 +37,26 @@ export default function EditorCard({
     setCode(getDefaultCode(language, problem));
   }, [language, problem]);
 
+  useEffect(() => {
+    if (pvp && disableSubmit) sendPvpSubmission();
+  }, [disableSubmit]);
+
+  async function sendPvpSubmission() {
+    console.log("Sending pvp submission");
+    try {
+      await sendSubmission(LANGUAGES.find(l => l.value === language)?.id || 1);
+      if (setDisableSubmit) setDisableSubmit(true);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   const handleLanguageChange = (e: SelectChangeEvent) => {
     setLanguage(e.target.value);
     if (passLanguage) passLanguage(e.target.value);
   };
 
-  const sendSubmission = async (languageId: number) => {
+  const sendSubmission = async (languageId: number): Promise<Judge0Submission | null> => {
     setRunLoading(true);
     if (passLoading) passLoading(true);
     const token = await sendJudge0Submission({
@@ -45,14 +65,16 @@ export default function EditorCard({
     });
 
     let retryCount = 0;
+    let result: Judge0Submission | null = null;
     const intervalId = setInterval(async () => {
       retryCount++;
       try {
-        const result = await getJudge0Result(token);
-        if (result.status === "Processing" && retryCount < 3) return;
+        result = await getJudge0Result(token);
+        if (result.status === "Processing" && retryCount < 3) throw ("Cannot get result");
         clearInterval(intervalId);
         if (passTestResults) passTestResults(result);
         setTestResults(result);
+        return result;
       } catch (err) {
         console.error(err);
         clearInterval(intervalId);
@@ -61,6 +83,7 @@ export default function EditorCard({
         if (passLoading) passLoading(false);
       }
     }, 1000);
+    return result;
   }
 
   const handleRunCode = async () => {
@@ -72,17 +95,18 @@ export default function EditorCard({
   };
 
   const handleSubmitCode = async () => {
+    console.log("DONT BE HERE");
     if (!problem || !language) return;
     if (!testResults) {
       console.error("No test results");
       return;
     }
-    
+
     setSubmitLoading(true);
     try {
       const submission: Submission = {
         // TODO: Set from auth context
-        userId: "68594614c973259bbe213684", 
+        userId: "68594614c973259bbe213684",
         problemId: problem.id,
         result: passedAllTests(testResults, problem) ? "Accepted" : "Denied",
         language,
@@ -131,7 +155,7 @@ export default function EditorCard({
           <Stack sx={{ display: "flex", flexDirection: "row", gap: 2, justifyContent: "flex-end", alignItems: "center" }}>
             {runLoading && <CircularProgress size={24} />}
             <Button variant="contained" color="secondary" onClick={handleRunCode} disabled={runLoading} sx={{ fontWeight: "bold" }}>Run Code</Button>
-            <Button variant="contained" color="primary" onClick={handleSubmitCode} disabled={submitLoading || !testResults} sx={{ fontWeight: "bold" }}>Submit Code</Button>
+            <Button variant="contained" color="primary" onClick={() => pvp ? sendPvpSubmission() : handleSubmitCode()} disabled={submitLoading || !testResults || disableSubmit} sx={{ fontWeight: "bold" }}>Submit Code</Button>
           </Stack>
         </Box>
       </Stack>
