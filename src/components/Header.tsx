@@ -7,7 +7,7 @@ import { auth } from "@/auth";
 
 export default async function Header() {
   const session = await auth();
-  const isLoggedIn = !!session;
+  const isLoggedIn = !!session?.user;
 
   return (
     <AppBar position="static" color="transparent" elevation={0}>
