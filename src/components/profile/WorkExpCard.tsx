@@ -76,7 +76,7 @@ export default function WorkExpCard({ workDrafts, setWorkDrafts, work, index, ed
           <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
             <Typography>Notes: </Typography>
             <InlineTextEdit
-              value={work.notes}
+              value={work.notes || ""}
               onChange={(v: string) => handleWorkChange("notes", v)}
               editing={editWork}
               styling={{ color: "text" }}

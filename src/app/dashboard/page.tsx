@@ -25,7 +25,7 @@ export default function Dashboard() {
   }, [status, router]);
 
   React.useEffect(() => {
-    if (status !== "authenticated" || !session?.user?.id) return;
+    if (status !== "authenticated") return;
 
     getUser(session.user.id)
       .then(data => {
@@ -48,7 +48,7 @@ export default function Dashboard() {
       .catch(() => {
         console.error("Failed to load submissions");
       });
-  }, [status, session?.user?.id]);
+  }, [status, session]);
 
   // Prevent flash of protected content before being authenticated
   if (status === "loading" || status === "unauthenticated") return null;

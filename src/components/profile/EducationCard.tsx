@@ -78,7 +78,7 @@ export default function EducationCard({ eduDrafts, setEduDrafts, edu, index, edi
         <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
           <Typography>Notes: </Typography>
           <InlineEdit
-            value={edu.notes}
+            value={edu.notes || ""}
             onChange={(v: string) => handleEduChange("notes", v)}
             editing={editEdu}
             label="Notes"

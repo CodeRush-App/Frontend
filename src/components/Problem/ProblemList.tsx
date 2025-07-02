@@ -73,7 +73,7 @@ const ProblemListElement = memo(function ProblemListElement({ problem, getTagCol
           <span>, Success Rate: {getSuccessRate()}%</span>
         </p>
       </Box>
-      <Button variant="contained" href={`/problems/${problem.slug}`}>Solve Problem</Button>
+      <Button variant="contained" href={`/solve/${problem.id}`}>Solve Problem</Button>
     </Box>
   );
 });
