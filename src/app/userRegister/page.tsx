@@ -1,81 +1,93 @@
 "use client"
 import { Box, Button, Checkbox, Divider, Link, Paper, TextField } from "@mui/material";
 import GoogleIcon from '@mui/icons-material/Google';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import FacebookIcon from '@mui/icons-material/Facebook';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { useState } from "react"
 import { ShineBorder } from "@/components/magicui/shine-border";
+import { registerUser } from "@/app/api/user";
+import { useRouter } from "next/navigation";
 
 export default function UserRegister() {
   const [email, setEmail] = useState<string | undefined>("");
-  const [emailError, setEmailError] = useState<boolean>(false);
   const [username, setUsername] = useState<string | undefined>("");
   const [password, setPassword] = useState<string | undefined>("");
-  const [passwordError, setPasswordError] = useState<boolean>(false);
   const [confirmPassword, setConfirmPassword] = useState<string | undefined>("");
-  const [confirmPasswordError, setConfirmPasswordError] = useState<boolean>(false);
   const [isAgreed, setIsAgreed] = useState<boolean>(false);
-  const [isAgreedError, setIsAgreedError] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
+  const router = useRouter();
 
   const verifyEmail = (email: string) => {
     email = email.trim();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    setEmailError(!emailRegex.test(email));
+    return emailRegex.test(email);
   }
 
   const verifyPassword = (password: string) => {
     password = password.trim();
-    // Password must be at least 8 characters long and contain at least one letter and one number
+    // Password must be at least 8 characters long and contain at least one letter, one number and no special characters
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-    setPasswordError(!passwordRegex.test(password));
+    return passwordRegex.test(password);
   }
 
-  const handleRegisterClick = () => {
+  const handleRegisterClick = async () => {
     if (!email || !username || !password || !confirmPassword) {
-      // TODO: Show error message
-      alert("TODO: Show error message");
+      setError("Please fill in all fields");
       return;
     }
 
-    verifyEmail(email);
-    verifyPassword(password);
-    setConfirmPasswordError(password !== confirmPassword)
-    setIsAgreedError(!isAgreed);
+    const checks = [
+      { valid: verifyEmail(email), message: "Invalid email format" },
+      { valid: verifyPassword(password), message: "Password must be at least 8 characters long and contain at least one letter, one number and no special characters" },
+      { valid: password === confirmPassword, message: "Password confirmation does not match" },
+      { valid: isAgreed, message: "You must agree to the terms and conditions" },
+    ];
 
-    if (emailError || passwordError || confirmPasswordError || isAgreedError) {
-      alert("Please fix the errors before proceeding.");
-      return;
+    for (const check of checks) {
+      if (!check.valid) {
+        setError(check.message);
+        return;
+      }
     }
 
-    // TODO: Register logic
-    console.log(email, username, password, confirmPassword);
+    setError("");
+    try {
+      await registerUser({
+        email,
+        username,
+        password,
+        provider: "credentials",
+      });
+    } catch (error) {
+      console.error(error);
+      setError("Error trying to register user");
+      return;
+    }
+    router.push("/login");
   };
 
   return (
     <Box className="radial-background" sx={{ display: "flex", justifyContent: "center", alignItems: "center", position: "absolute", height: "100vh", top: 0, zIndex: -1 }}>
-      <Paper elevation={3} sx={{ position: "relative", padding: 4, display: "flex", flexDirection: "column", alignItems: "center", minWidth: "500px" }}>
+      <Paper elevation={3} sx={{ position: "relative", padding: 4, display: "flex", flexDirection: "column", alignItems: "center", width: "25vw", minWidth: "500px" }}>
         <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} />
 
         <Box sx={{ alignSelf: "flex-start", fontSize: 32, fontWeight: "bold" }}>Sign up</Box>
 
         <TextField type="text" id="Username" label="Username" variant="outlined" sx={{ width: "100%", mt: 4 }} onChange={(e) => setUsername(e.target.value)} />
 
-        <TextField error={emailError} type="email" id="Email" label="E-Mail" variant="outlined" sx={{ width: "100%", mt: 2 }} onChange={(e) => setEmail(e.target.value)} />
-        {emailError && <Box sx={{ color: "red", alignSelf: "flex-start" }}>Invalid email format.</Box>}
+        <TextField type="email" id="Email" label="E-Mail" variant="outlined" sx={{ width: "100%", mt: 2 }} onChange={(e) => setEmail(e.target.value)} />
 
-        <TextField error={passwordError} type="password" id="Password" label="Password" variant="outlined" sx={{ width: "100%", mt: 2 }} onChange={(e) => setPassword(e.target.value)} />
-        {passwordError && <Box sx={{ color: "red", alignSelf: "flex-start" }}>Password must be at least 8 characters long <br /> and contain at least one letter and one number.</Box>}
+        <TextField type="password" id="Password" label="Password" variant="outlined" sx={{ width: "100%", mt: 2 }} onChange={(e) => setPassword(e.target.value)} />
 
-        <TextField error={confirmPasswordError || passwordError} type="password" id="ConfirmPassword" label="Confirm Password" variant="outlined" sx={{ width: "100%", mt: 2 }} onChange={(e) => setConfirmPassword(e.target.value)} />
-        {confirmPasswordError && <Box sx={{ color: "red", alignSelf: "flex-start" }}>Passwords do not match.</Box>}
+        <TextField type="password" id="ConfirmPassword" label="Confirm Password" variant="outlined" sx={{ width: "100%", mt: 2 }} onChange={(e) => setConfirmPassword(e.target.value)} />
 
-        <Box sx={{ alignSelf: "flex-start", mt: 1 }}>
+        {/* Error message shown above the conditions checkbox */}
+        {error && <Box sx={{ color: "red", alignSelf: "flex-start", mt: 1 }}>{error}</Box>}
+
+        <Box sx={{ alignSelf: "flex-start" }}>
           <Checkbox onChange={(e) => setIsAgreed(e.target.checked)} color="primary" sx={{ pl: 0, pr: 0.5, left: -3, top: -2 }} />
-          I agree to CodeRush's Terms of Service and Privacy Policy
+          I agree to CodeRush&apos;s Terms of Service and Privacy Policy
         </Box>
 
-        {isAgreedError && <Box sx={{ color: "red", alignSelf: "flex-start" }}>You must agree to the terms and conditions.</Box>}
         <Button variant="contained" color="primary" sx={{ width: "100%", mt: 2 }} onClick={handleRegisterClick}>
           Register
         </Button>
@@ -83,12 +95,7 @@ export default function UserRegister() {
         <Divider textAlign="center" sx={{ width: "100%", mt: 2 }}>or</Divider>
 
         <Button sx={{ width: "100%", mt: 2 }} color="secondary" variant="contained" > <GoogleIcon sx={{ mr: 1 }} />Google</Button>
-        <Box sx={{ display: "flex", width: "100%", mt: 1, justifyContent: "space-between" }}>
-          {/* TODO: Icon click Logic */}
-          <Button sx={{ width: "100%" }} color="secondary" variant="contained" ><GitHubIcon sx={{ mr: 1 }} /> GitHub</Button>
-          <Button sx={{ width: "100%", ml: 1, mr: 1 }} color="secondary" variant="contained" ><LinkedInIcon sx={{ mr: 1 }} /> LinkedIn</Button>
-          <Button sx={{ width: "100%" }} color="secondary" variant="contained" ><FacebookIcon sx={{ mr: 1 }} /> Facebook</Button>
-        </Box>
+        <Button sx={{ width: "100%" }} color="secondary" variant="contained" ><GitHubIcon sx={{ mr: 1 }} /> GitHub</Button>
 
         <Box sx={{ mt: 2 }}>
           Already have an account? <Link color="primary" href="/login">Sign in</Link>

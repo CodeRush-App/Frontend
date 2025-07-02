@@ -6,10 +6,10 @@ export default function LoginSelection() {
   return (
     <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
       <DotPattern style={{ position: "absolute", top: 0, left: -5, zIndex: -1 }}
-          className={cn(
-            "[mask-image:radial-gradient(50vw_circle_at_center,gray,transparent)]",
-          )}
-        />
+        className={cn(
+          "[mask-image:radial-gradient(50vw_circle_at_center,gray,transparent)]",
+        )}
+      />
       <Box sx={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "center", width: "40vw", height: "80vh", justifyContent: "center", gap: 2, padding: 4 }}>
         <Box sx={{ fontSize: 32, fontWeight: "bold" }}>
           For Developers
@@ -21,7 +21,7 @@ export default function LoginSelection() {
           <Button variant="contained" color="primary" sx={{ mt: 4, mb: 10 }} href="/login">
             Login
           </Button>
-          Don't have an account? <Link color="primary" href="/userRegister">Sign up</Link>
+          Don&apos;t have an account? <Link color="primary" href="/userRegister">Sign up</Link>
         </Box>
       </Box>
 

@@ -1,9 +1,13 @@
-import { AppBar, Avatar, Box, Button, Link, TextField, Toolbar } from "@mui/material";
+import { AppBar, Box, Button, Link, TextField, Toolbar } from "@mui/material";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import Image from "next/image";
 import logo from "../../public/logo.png";
+import { auth } from "@/auth";
 
-export default function Header({ isLoggedIn }: { isLoggedIn?: boolean }) {
-  // TODO: Replace with actual authentication logic
+export default async function Header() {
+  const session = await auth();
+  const isLoggedIn = !!session;
 
   return (
     <AppBar position="static" color="transparent" elevation={0}>
@@ -51,10 +55,12 @@ export default function Header({ isLoggedIn }: { isLoggedIn?: boolean }) {
           {isLoggedIn && (
             <>
               <TextField type="text" id="search" label="Search" variant="outlined" size="small" sx={{ width: "200px" }} />
-              <Button variant="text">
-                TODO: BELL
+              <Button color="textPrimary">
+                <NotificationsIcon />
               </Button>
-              <Avatar alt="User Avatar" src="/avatar.png" sx={{ width: 40, height: 40, cursor: "pointer" }} component={Link} href="/profile" />
+              <Link color="textPrimary" href="/profile">
+                <AccountCircleIcon fontSize="large" />
+              </Link>
             </>)}
           {!isLoggedIn && (<>
             <Link color="textPrimary" href="/login" underline="none">
