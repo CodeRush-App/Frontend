@@ -1,6 +1,7 @@
 import { DotPattern } from "@/components/magicui/dot-pattern";
 import { cn } from "@/lib/utils";
-import { Box, Button, Divider, Link } from "@mui/material";
+import { Box, Button, Divider } from "@mui/material";
+import Link from "next/link";
 
 export default function LoginSelection() {
   return (

@@ -1,9 +1,10 @@
-import { AppBar, Box, Button, Link, TextField, Toolbar } from "@mui/material";
+import { AppBar, Box, Button, TextField, Toolbar } from "@mui/material";
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Image from "next/image";
 import logo from "../../public/logo.png";
 import { auth } from "@/auth";
 import ProfileButton from "./headerProfileButton";
+import Link from "next/link";
 
 export default async function Header() {
   const session = await auth();
@@ -19,19 +20,19 @@ export default async function Header() {
               <Link href="/dashboard">
                 <Image src={logo} alt="Logo" width={140} height={140} />
               </Link>
-              <Link color="textPrimary" href="/problems" underline="none">
+              <Link color="textPrimary" href="/problems">
                 Problems
               </Link>
-              <Link color="textPrimary" href="/compete" underline="none">
+              <Link color="textPrimary" href="/compete">
                 Compete
               </Link>
-              <Link color="textPrimary" href="/teamup" underline="none">
+              <Link color="textPrimary" href="/teamup">
                 Team-up
               </Link>
-              <Link color="textPrimary" href="/leaderboards" underline="none">
+              <Link color="textPrimary" href="/leaderboards">
                 Leaderboards
               </Link>
-              <Link color="textPrimary" href="/gethired" underline="none">
+              <Link color="textPrimary" href="/gethired">
                 Get hired
               </Link>
             </>)}
@@ -41,10 +42,10 @@ export default async function Header() {
               <Link href="/">
                 <Image src={logo} alt="Logo" width={140} height={140} />
               </Link>
-              <Link color="textPrimary" href="/dashboard" underline="none">
+              <Link color="textPrimary" href="/dashboard">
                 Dashboard
               </Link>
-              <Link color="textPrimary" href="/pricing" underline="none">
+              <Link color="textPrimary" href="/pricing">
                 Pricing
               </Link>
             </>)}
@@ -61,7 +62,7 @@ export default async function Header() {
               <ProfileButton />
             </>)}
           {!isLoggedIn && (<>
-            <Link color="textPrimary" href="/login" underline="none">
+            <Link color="textPrimary" href="/login">
               Log In
             </Link>
             <Button variant="contained" color="primary" sx={{ fontWeight: "bold" }} href="/loginSelection">

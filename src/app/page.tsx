@@ -33,7 +33,7 @@ export default function Home() {
           <Box color="textPrimary" sx={{ fontSize: 18, textAlign: "start" }}>
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, tempor invidunt ut labore et dolore magna aliquyam erat
           </Box>
-          <Link href="/userRegister" style={{ color: "textPrimary", textDecoration: "underline" }}> Get started </Link>
+          <Link href="/userRegister" style={{ textDecoration: "underline" }}> Get started </Link>
         </Box>
         <Image src={code} alt="Code" width={450} />
       </Box>
@@ -47,7 +47,7 @@ export default function Home() {
           <Box color="textPrimary" sx={{ fontSize: 18, textAlign: "start" }}>
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, tempor invidunt ut labore et dolore magna aliquyam erat
           </Box>
-          <Link href="/userRegister" style={{ color: "textPrimary", textDecoration: "underline" }}> Get started </Link>
+          <Link href="/userRegister" style={{ textDecoration: "underline" }}> Get started </Link>
         </Box>
       </Box>
 
@@ -59,7 +59,7 @@ export default function Home() {
           <Box color="textPrimary" sx={{ fontSize: 18, textAlign: "start" }}>
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, tempor invidunt ut labore et dolore magna aliquyam erat
           </Box>
-          <Link href="/userRegister" style={{ color: "textPrimary", textDecoration: "underline" }}> Get started </Link>
+          <Link href="/userRegister" style={{ textDecoration: "underline" }}> Get started </Link>
         </Box>
         <Image src={code} alt="Code" width={450} />
       </Box>

@@ -1,11 +1,12 @@
 "use client"
-import { Box, Button, Checkbox, Divider, Link, Paper, TextField, Typography } from "@mui/material";
+import { Box, Button, Checkbox, Divider, Paper, TextField, Typography } from "@mui/material";
 import { ShineBorder } from "@/components/magicui/shine-border";
 import { useState } from "react";
 import GoogleIcon from '@mui/icons-material/Google';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function UserLogin() {
   const [email, setEmail] = useState<string | undefined>("");

@@ -1,9 +1,10 @@
 "use client"
-import { Box, Button, Checkbox, Link, Paper, TextField } from "@mui/material";
+import { Box, Button, Checkbox, Paper, TextField } from "@mui/material";
 import { useState } from "react"
 import { ShineBorder } from "@/components/magicui/shine-border";
 import { registerCompany } from "../api/company";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function CompanyRegister() {
   const [email, setEmail] = useState<string | undefined>("");
