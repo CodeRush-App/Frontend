@@ -1,9 +1,9 @@
 import { AppBar, Box, Button, Link, TextField, Toolbar } from "@mui/material";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Image from "next/image";
 import logo from "../../public/logo.png";
 import { auth } from "@/auth";
+import ProfileButton from "./headerProfileButton";
 
 export default async function Header() {
   const session = await auth();
@@ -58,9 +58,7 @@ export default async function Header() {
               <Button color="inherit">
                 <NotificationsIcon />
               </Button>
-              <Link color="inherit" href="/profile">
-                <AccountCircleIcon fontSize="large" />
-              </Link>
+              <ProfileButton />
             </>)}
           {!isLoggedIn && (<>
             <Link color="textPrimary" href="/login" underline="none">
