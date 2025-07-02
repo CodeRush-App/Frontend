@@ -1,14 +1,15 @@
+"use client"
 import { AppBar, Box, Button, TextField, Toolbar } from "@mui/material";
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Image from "next/image";
 import logo from "../../public/logo.png";
-import { auth } from "@/auth";
 import ProfileButton from "./headerProfileButton";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
-export default async function Header() {
-  const session = await auth();
-  const isLoggedIn = !!session?.user;
+export default function Header() {
+  const { data: session, status } = useSession();
+  const isLoggedIn = status === "authenticated";
 
   return (
     <AppBar position="static" color="transparent" elevation={0}>
@@ -32,7 +33,7 @@ export default async function Header() {
               <Link color="textPrimary" href="/leaderboards">
                 Leaderboards
               </Link>
-              <Link color="textPrimary" href="/gethired">
+              <Link color="textPrimary" href="/getHired">
                 Get hired
               </Link>
             </>)}
@@ -41,9 +42,6 @@ export default async function Header() {
             <>
               <Link href="/">
                 <Image src={logo} alt="Logo" width={140} height={140} />
-              </Link>
-              <Link color="textPrimary" href="/dashboard">
-                Dashboard
               </Link>
               <Link color="textPrimary" href="/pricing">
                 Pricing
@@ -56,10 +54,10 @@ export default async function Header() {
           {isLoggedIn && (
             <>
               <TextField type="text" id="search" label="Search" variant="outlined" size="small" sx={{ width: "200px" }} />
-              <Button color="inherit">
+              <Button>
                 <NotificationsIcon />
               </Button>
-              <ProfileButton />
+              <ProfileButton userId={session.user.id} />
             </>)}
           {!isLoggedIn && (<>
             <Link color="textPrimary" href="/login">

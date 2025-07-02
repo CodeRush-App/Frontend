@@ -1,11 +1,11 @@
-'use client'
+"use client"
 import { Button, Menu, MenuItem } from "@mui/material";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 
-export default function ProfileButton() {
+export default function ProfileButton({ userId }: { userId: string }) {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const router = useRouter();
 
@@ -19,7 +19,7 @@ export default function ProfileButton() {
 
     const handleProfileClick = () => {
         handleClose();
-        router.push("/profile");
+        router.push(`/profile/${userId}`);
     }
 
     const handleLogoutClick = async () => {
@@ -29,7 +29,7 @@ export default function ProfileButton() {
 
     return (
         <>
-            <Button color="inherit" onClick={handleClick}>
+            <Button onClick={handleClick}>
                 <AccountCircleIcon fontSize="large" />
             </Button>
             <Menu open={!!anchorEl} anchorEl={anchorEl} onClose={handleClose} sx={{ mt: 2 }}>

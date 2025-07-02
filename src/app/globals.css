@@ -59,13 +59,13 @@
   }
 }
 
-/* 
+/*
 Brand: #F62F63
 darkest: #0F172A
 dark: #27375E
 mid: #ABB8C9
 light: #E1E6EB
-lightest: #FFFFFF 
+lightest: #FFFFFF
 */
 :root {
   --radius: 0.625rem;
@@ -121,4 +121,30 @@ body {
   height: 100%;
   width: 100%;
   background-image: radial-gradient(#001341, #0F172A);
+}
+
+h1 {
+  @apply text-2xl font-bold;
+}
+
+h2 {
+  @apply text-2xl font-bold;
+}
+
+h3 {
+  @apply text-lg;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #27375E;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #F62F63;
+  border-radius: 4px;
 }

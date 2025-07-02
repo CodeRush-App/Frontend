@@ -62,7 +62,7 @@ export default function UserLogin() {
 
         <Box sx={{ mt: 2 }}>
           Don&apos;t have an account?&nbsp;
-          <Link color="primary" href="/loginSelection">Sign up</Link>
+          <Link color="primary" style={{ textDecoration: "underline" }} href="/loginSelection">Sign up</Link>
         </Box>
       </Paper>
     </Box>

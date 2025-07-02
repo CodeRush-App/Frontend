@@ -88,10 +88,10 @@ export default function CompanyRegister() {
         </Button>
 
         <Box sx={{ mt: 2 }}>
-          Already have an account? <Link color="primary" href="/login">Sign in</Link>
+          Already have an account? <Link color="primary" style={{ textDecoration: "underline" }} href="/login">Sign in</Link>
         </Box>
         <Box sx={{ mt: 2 }}>
-          Looking for an individual account? <Link color="primary" href="/userRegister">Go here instead</Link>
+          Looking for an individual account? <Link color="primary" style={{ textDecoration: "underline" }} href="/userRegister">Go here instead</Link>
         </Box>
       </Paper>
     </Box>

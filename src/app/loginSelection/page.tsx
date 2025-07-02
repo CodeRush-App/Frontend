@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function LoginSelection() {
   return (
-    <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+    <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
       <DotPattern style={{ position: "absolute", top: 0, left: -5, zIndex: -1 }}
         className={cn(
           "[mask-image:radial-gradient(50vw_circle_at_center,gray,transparent)]",
@@ -22,7 +22,7 @@ export default function LoginSelection() {
           <Button variant="contained" color="primary" sx={{ mt: 4, mb: 10 }} href="/login">
             Login
           </Button>
-          Don&apos;t have an account? <Link color="primary" href="/userRegister">Sign up</Link>
+          Don&apos;t have an account? <Link color="primary" style={{ textDecoration: "underline" }} href="/userRegister">Sign up</Link>
         </Box>
       </Box>
 
@@ -39,7 +39,7 @@ export default function LoginSelection() {
           <Button variant="contained" color="primary" sx={{ mt: 4, mb: 10 }} href="/login">
             Login
           </Button>
-          Dont have an account? <Link color="primary" href="/companyRegister">Request access</Link>
+          Dont have an account? <Link color="primary" style={{ textDecoration: "underline" }} href="/companyRegister">Request access</Link>
         </Box>
       </Box>
     </Box>

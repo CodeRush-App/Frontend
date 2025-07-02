@@ -84,7 +84,7 @@ export default function UserRegister() {
         {/* Error message shown above the conditions checkbox */}
         {error && <Box sx={{ color: "red", alignSelf: "flex-start", mt: 1 }}>{error}</Box>}
 
-        <Box sx={{ alignSelf: "flex-start" }}>
+        <Box sx={{ alignSelf: "flex-start", mt: 1 }}>
           <Checkbox onChange={(e) => setIsAgreed(e.target.checked)} color="primary" sx={{ pl: 0, pr: 0.5, left: -3, top: -2 }} />
           I agree to CodeRush&apos;s Terms of Service and Privacy Policy
         </Box>
@@ -99,7 +99,7 @@ export default function UserRegister() {
         <Button sx={{ width: "100%" }} color="secondary" variant="contained" ><GitHubIcon sx={{ mr: 1 }} /> GitHub</Button>
 
         <Box sx={{ mt: 2 }}>
-          Already have an account? <Link color="primary" href="/login">Sign in</Link>
+          Already have an account? <Link color="primary" style={{ textDecoration: "underline" }} href="/login">Sign in</Link>
         </Box>
       </Paper>
     </Box>
