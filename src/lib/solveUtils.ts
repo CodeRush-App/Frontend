@@ -15,7 +15,7 @@ export function addMain(language: string, code: string, problem: Problem) {
   let mainCode = "";
 
   function serializeArg(
-    val: boolean | number | string,
+    val: boolean | number | string | (boolean | number | string)[],
     type: string,
     lang: string
   ): string {

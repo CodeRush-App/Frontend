@@ -49,7 +49,7 @@ export default function EditorCard({
       retryCount++;
       try {
         const result = await getJudge0Result(token);
-        if (result.status === "Processing" && retryCount < 10) return;
+        if (result.status === "Processing" && retryCount < 3) return;
         clearInterval(intervalId);
         if (passTestResults) passTestResults(result);
         setTestResults(result);
@@ -60,7 +60,7 @@ export default function EditorCard({
         setRunLoading(false);
         if (passLoading) passLoading(false);
       }
-    }, 4000);
+    }, 1000);
   }
 
   const handleRunCode = async () => {
