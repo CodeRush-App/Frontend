@@ -8,12 +8,29 @@ export interface Problem {
   topic: string;
   tags: string[];
   description: string;
-  function: string;
+  function: ProblemFunction;
   constraints: string[];
-  examples: string[];
-  testCases: string[];
+  examples: Example[];
+  testCases: TestCase[];
   createdAt: string;
   updatedAt: string;
+}
+
+export interface Example {
+  explanation: string;
+  input: string;
+  output: boolean;
+}
+
+export interface ProblemFunction {
+  name: string;
+  parameters: { name: string; type: string, description: string }[];
+  return: { type: string, description: string };
+}
+
+export interface TestCase {
+  input: string;
+  expectedOutput: string;
 }
 
 /**
