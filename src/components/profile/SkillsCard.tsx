@@ -1,5 +1,5 @@
 "use client"
-import { updateUser, User } from "@/api/user";
+import { updateUser, User } from "@/app/api/user";
 import { brandColors } from "@/app/theme";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";

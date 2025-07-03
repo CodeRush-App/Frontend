@@ -1,5 +1,5 @@
 "use client"
-import { updateUser, User } from "@/api/user";
+import { updateUser, User } from "@/app/api/user";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import EditIcon from "@mui/icons-material/Edit";
@@ -50,7 +50,7 @@ export default function PersonalInformationCard({ user, setUser }: { user: User,
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <Typography sx={{ fontWeight: 500 }}>Full Name:</Typography>
             <InlineTextEdit
-              value={infoDraft.name}
+              value={infoDraft.name || ""}
               onChange={(v: string) => setInfoDraft(d => ({ ...d, name: v }))}
               editing={editInfo}
               label="Full Name"
@@ -60,7 +60,7 @@ export default function PersonalInformationCard({ user, setUser }: { user: User,
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <Typography sx={{ fontWeight: 500 }}>Phone:</Typography>
             <InlineTextEdit
-              value={infoDraft.phoneNumber}
+              value={infoDraft.phoneNumber || ""}
               onChange={(v: string) => setInfoDraft(d => ({ ...d, phoneNumber: v }))}
               editing={editInfo}
               label="Phone"
@@ -70,7 +70,7 @@ export default function PersonalInformationCard({ user, setUser }: { user: User,
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <Typography sx={{ fontWeight: 500 }}>Country:</Typography>
             <InlineTextEdit
-              value={infoDraft.country}
+              value={infoDraft.country || ""}
               onChange={(v: string) => setInfoDraft(d => ({ ...d, country: v }))}
               editing={editInfo}
               label="Country"

@@ -1,4 +1,4 @@
-import { Problem } from "@/api/problem";
+import { Problem } from "@/app/api/problem";
 import { brandColors } from "@/app/theme";
 import { getSuccessRate } from "@/lib/problemUtils";
 import { Box, Button } from "@mui/material";

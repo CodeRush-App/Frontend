@@ -1,5 +1,5 @@
 "use client"
-import { User } from "@/api/user";
+import { User } from "@/app/api/user";
 import CloseIcon from "@mui/icons-material/Close";
 import { Box, Card, IconButton, Typography } from "@mui/material";
 import { useState } from "react";
@@ -76,7 +76,7 @@ export default function WorkExpCard({ workDrafts, setWorkDrafts, work, index, ed
           <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
             <Typography>Notes: </Typography>
             <InlineTextEdit
-              value={work.notes}
+              value={work.notes || ""}
               onChange={(v: string) => handleWorkChange("notes", v)}
               editing={editWork}
               styling={{ color: "text" }}

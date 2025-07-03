@@ -33,10 +33,6 @@ export interface TestCase {
   expectedOutput: string;
 }
 
-/**
- * Fetches all problems from the API.
- * @returns {Promise<Problem[]>} Array of problems
- */
 export const getProblems = async (): Promise<Problem[]> => {
   const response = await axiosInstance.get<Problem[]>("/problems");
   return response.data;

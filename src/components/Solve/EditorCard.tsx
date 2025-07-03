@@ -1,10 +1,11 @@
 "use client"
-import { Problem } from "@/api/problem";
-import { createSubmission, getJudge0Result, Judge0Submission, sendJudge0Submission, Submission } from "@/api/submission";
+import { Problem } from "@/app/api/problem";
+import { createSubmission, getJudge0Result, Judge0Submission, sendJudge0Submission, Submission } from "@/app/api/submission";
 import { addMain, getDefaultCode, LANGUAGES, passedAllTests } from "@/lib/solveUtils";
 import { Box, Button, Card, CircularProgress, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Stack } from "@mui/material";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 // Dynamically import Monaco to avoid SSR issues
 const MonacoEditor = dynamic(() => import("@monaco-editor/react"), { ssr: false });
 
@@ -26,6 +27,7 @@ export default function EditorCard({
   const [language, setLanguage] = useState(LANGUAGES[0].value);
   const [submitLoading, setSubmitLoading] = useState(false);
   const [testResults, setTestResults] = useState<Judge0Submission | null>(null);
+  const { data: session } = useSession();
 
   useEffect(() => {
     setCode(getDefaultCode(language, problem));
@@ -72,17 +74,16 @@ export default function EditorCard({
   };
 
   const handleSubmitCode = async () => {
-    if (!problem || !language) return;
+    if (!problem || !language || !session) return;
     if (!testResults) {
       console.error("No test results");
       return;
     }
-    
+
     setSubmitLoading(true);
     try {
       const submission: Submission = {
-        // TODO: Set from auth context
-        userId: "68594614c973259bbe213684", 
+        userId: session.user.id,
         problemId: problem.id,
         result: passedAllTests(testResults, problem) ? "Accepted" : "Denied",
         language,

@@ -1,10 +1,15 @@
-import { AppBar, Avatar, Box, Button, IconButton, Link, TextField, Toolbar } from "@mui/material";
-import Image from "next/image";
-import logo from "@/public/logo.png";
+"use client"
+import { AppBar, Box, IconButton, Button, TextField, Toolbar } from "@mui/material";
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import Image from "next/image";
+import logo from "../../public/logo.png";
+import ProfileButton from "./headerProfileButton";
+import Link from "next/link";
+import { useSession } from "next-auth/react";
 
-export default function Header({ isLoggedIn }: { isLoggedIn?: boolean }) {
-  // TODO: Replace with actual authentication logic
+export default function Header() {
+  const { data: session, status } = useSession();
+  const isLoggedIn = status === "authenticated";
 
   return (
     <AppBar position="static" color="transparent" elevation={0}>
@@ -16,19 +21,19 @@ export default function Header({ isLoggedIn }: { isLoggedIn?: boolean }) {
               <Link href="/dashboard">
                 <Image src={logo} alt="Logo" width={140} height={140} />
               </Link>
-              <Link color="textPrimary" href="/problems" underline="none">
+              <Link color="textPrimary" href="/problems">
                 Problems
               </Link>
-              <Link color="textPrimary" href="/compete" underline="none">
+              <Link color="textPrimary" href="/compete">
                 Compete
               </Link>
-              <Link color="textPrimary" href="/teamup" underline="none">
+              <Link color="textPrimary" href="/teamup">
                 Team-up
               </Link>
-              <Link color="textPrimary" href="/leaderboards" underline="none">
+              <Link color="textPrimary" href="/leaderboards">
                 Leaderboards
               </Link>
-              <Link color="textPrimary" href="/getHired" underline="none">
+              <Link color="textPrimary" href="/getHired">
                 Get hired
               </Link>
             </>)}
@@ -38,10 +43,7 @@ export default function Header({ isLoggedIn }: { isLoggedIn?: boolean }) {
               <Link href="/">
                 <Image src={logo} alt="Logo" width={140} height={140} />
               </Link>
-              <Link color="textPrimary" href="/dashboard" underline="none">
-                Dashboard
-              </Link>
-              <Link color="textPrimary" href="/pricing" underline="none">
+              <Link color="textPrimary" href="/pricing">
                 Pricing
               </Link>
             </>)}
@@ -52,15 +54,13 @@ export default function Header({ isLoggedIn }: { isLoggedIn?: boolean }) {
           {isLoggedIn && (
             <>
               <TextField type="text" id="search" label="Search" variant="outlined" size="small" sx={{ width: "200px" }} />
-              {/* TODO: Implement functions */}
               <IconButton>
                 <NotificationsIcon />
               </IconButton>
-              {/* TODO: Replace with actual user ID and avatar */}
-              <Avatar alt="User Avatar" src="/avatar.png" sx={{ width: 40, height: 40, cursor: "pointer" }} component={Link} href="/profile/68594614c973259bbe213684" />
+              <ProfileButton userId={session.user.id} />
             </>)}
           {!isLoggedIn && (<>
-            <Link color="textPrimary" href="/login" underline="none">
+            <Link color="textPrimary" href="/login">
               Log In
             </Link>
             <Button variant="contained" color="primary" sx={{ fontWeight: "bold" }} href="/loginSelection">

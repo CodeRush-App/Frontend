@@ -1,6 +1,6 @@
 "use client"
-import { getProblems, Problem } from "@/api/problem";
-import { getSubmissions, Submission } from "@/api/submission";
+import { getProblems, Problem } from "@/app/api/problem";
+import { getSubmissions, Submission } from "@/app/api/submission";
 import { brandColors } from "@/app/theme";
 import ProblemFilter, { ProblemFilterProps } from "@/components/Problem/ProblemFilter";
 import ProblemList from "@/components/Problem/ProblemList";
@@ -9,6 +9,8 @@ import { getProblemsSolved, getProgressToNextBadge, getSuccessRate, isProblemSol
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import { Box, CircularProgress, Divider, IconButton, MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function Problems() {
   const ALL_TOPICS = "All";
@@ -26,8 +28,16 @@ export default function Problems() {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const { status } = useSession();
+  const router = useRouter();
 
   useEffect(() => {
+    if (status === "unauthenticated") router.push("/login");
+  }, [status, router]);
+
+  useEffect(() => {
+    if (status !== "authenticated") return;
+
     getProblems()
       .then((problems) => {
         setProblems(problems);
@@ -46,7 +56,7 @@ export default function Problems() {
         setLoading(false);
       });
 
-  }, []);
+  }, [status]);
 
   const filteredProblems = useMemo(() => {
     let result = problems;
@@ -82,7 +92,7 @@ export default function Problems() {
   }, []);
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 4, width: "100%" }}>
       {loading ? (
         <Box sx={{ display: "flex", justifyContent: "center", mt: 6 }}>
           <CircularProgress color="primary" />

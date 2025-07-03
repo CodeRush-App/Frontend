@@ -1,6 +1,6 @@
 "use client"
-import { Problem } from "@/api/problem";
-import { Submission } from "@/api/submission";
+import { Problem } from "@/app/api/problem";
+import { Submission } from "@/app/api/submission";
 import { brandColors } from "@/app/theme";
 import { Box, Button, Card, CircularProgress, Divider, Chip, Tab, Tabs, Typography, Table, TableHead, TableRow, TableCell, TableBody } from "@mui/material";
 import { useState } from "react";
@@ -8,10 +8,9 @@ import { useState } from "react";
 export default function ProblemCard({ problem, submissions }: { problem: Problem, submissions: Submission[] }) {
   const [tab, setTab] = useState<number>(0);
 
-
   return (
     <Card sx={{ display: "flex", flexDirection: "column", p: 2, flex: 1, maxWidth: "30vw", gap: 2, maxHeight: "80vh", overflowY: "auto" }}>
-      {/* Tabbed Headers */}
+      {/* Tab Headers */}
       <Tabs value={tab} onChange={(_event: React.SyntheticEvent, v: number) => setTab(v)} variant="fullWidth" sx={{ mb: 2 }}>
         <Tab label="Problem" />
         <Tab label="Submissions" />

@@ -2,17 +2,20 @@ import Theme from "./theme";
 import "./globals.css";
 import Header from "@/components/Header";
 import { Box } from "@mui/material";
+import { SessionProvider } from "next-auth/react";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <Theme>
-          <Header isLoggedIn={true} />
-          <Box sx={{ width: "80vw", mx: "auto", mt: "10vh" }}>
-            {children}
-          </Box>
-        </Theme>
+        <SessionProvider>
+          <Theme>
+            <Header />
+            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: "80vw", mt: "5vh", mx: "auto" }}>
+              {children}
+            </Box>
+          </Theme>
+        </SessionProvider>
       </body>
     </html>
   );

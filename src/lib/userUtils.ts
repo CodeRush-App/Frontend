@@ -1,4 +1,4 @@
-import { UserScore } from "@/api/user";
+import { UserScore } from "@/app/api/user";
 
 export function getUserRank(userId: string, userScore: UserScore[]): number {
   return (

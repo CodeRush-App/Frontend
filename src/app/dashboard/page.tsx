@@ -3,22 +3,31 @@ import { Box, Divider, Typography } from "@mui/material";
 import Link from "next/link";
 import RankOverview from "@/components/Dashboard/RankOverview";
 import TopicBadge from "@/components/Dashboard/TopicBadge";
-import React from "react";
+import React, { useEffect } from "react";
 import BattleQueue from "@/components/Dashboard/BattleQueue";
 import TeamCard from "@/components/Dashboard/TeamCard";
-import { getProblems, Problem } from "@/api/problem";
-import { getSubmissions, Submission } from "@/api/submission";
-import { getUser } from "@/api/user";
-import { User } from "@/api/user";
+import { getProblems, Problem } from "@/app/api/problem";
+import { getSubmissions, Submission } from "@/app/api/submission";
+import { getUser } from "@/app/api/user";
+import { User } from "@/app/api/user";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function Dashboard() {
   const [user, setUser] = React.useState<User | null>(null);
   const [problems, setProblems] = React.useState<Problem[]>([]);
   const [submissions, setSubmissions] = React.useState<Submission[]>([]);
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status === "unauthenticated") router.push("/login");
+  }, [status, router]);
 
   React.useEffect(() => {
-    // TODO: Replace with actual user
-    getUser("68594614c973259bbe213684")
+    if (status !== "authenticated") return;
+
+    getUser(session.user.id)
       .then(data => {
         setUser(data);
       })
@@ -39,13 +48,15 @@ export default function Dashboard() {
       .catch(() => {
         console.error("Failed to load submissions");
       });
-  }, []);
+  }, [status, session]);
+
+  // Prevent flash of protected content before being authenticated
+  if (status === "loading" || status === "unauthenticated") return null;
 
   return (
-    <Box sx={{ mb: "5vh" }}>
+    <Box sx={{ mb: "5vh", width: "100%" }}>
       {/* Top row */}
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-
         <Box>
           <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 1 }}>
             <Typography sx={{ fontWeight: "bold", fontSize: 24 }}>Enter battle</Typography>
@@ -72,12 +83,14 @@ export default function Dashboard() {
         <Typography sx={{ fontWeight: "bold", fontSize: 24 }}>Continue Solving</Typography>
         <Divider sx={{ flex: 1, ml: 3, borderWidth: 2, borderColor: "#27375E", borderRadius: 2 }} />
       </Box>
+
       {/* Middle Row */}
       <Box sx={{ display: "flex", alignItems: "center", gap: 8 }}>
         {[...new Set(problems.map(p => p.topic))].slice(0, 4).map(topic => (
           <TopicBadge key={topic} problems={problems} submissions={submissions} selectedTopic={topic} />
         ))}
       </Box>
+
       {/* Bottom row */}
       <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", pt: 8, pb: 2 }}>
         <Typography sx={{ fontWeight: "bold", fontSize: 24 }}>Select a topic</Typography>
@@ -86,7 +99,7 @@ export default function Dashboard() {
       <Box>
         <Box sx={{ display: "grid", gridTemplateColumns: "repeat(3, 5fr)", gap: "2px" }}>
           {(() => {
-            const topics = ["Algorithms", "Data Structures", "Math", "Artificial Intelligence", "C", "C++", "Java","Python","Ruby","SQL","Databases","Linux Shell","Functional Programming","Regex","React"]
+            const topics = ["Algorithms", "Data Structures", "Math", "Artificial Intelligence", "C", "C++", "Java", "Python", "Ruby", "SQL", "Databases", "Linux Shell", "Functional Programming", "Regex", "React"]
             const gridSlots = 15; // 5 rows x 3 columns
             return Array.from({ length: gridSlots }).map((_, idx) => {
               const topic = topics[idx];

@@ -1,5 +1,5 @@
 "use client"
-import { getUserScore, User, UserScore } from "@/api/user";
+import { getUserScore, User, UserScore } from "@/app/api/user";
 import { getUserRank, getUserRankPercentage } from "@/lib/userUtils";
 import { Box, Card, CardContent, CircularProgress, Typography } from "@mui/material";
 import { useEffect, useState } from "react";

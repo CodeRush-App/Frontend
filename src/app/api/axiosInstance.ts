@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api";
+  process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api/v1";
 
 export const JUDGE0_URL = process.env.NEXT_PUBLIC_JUDGE0_URL || "";
 const JUDGE0_HEADERS = {
@@ -12,6 +12,7 @@ const JUDGE0_HEADERS = {
 
 const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
+  withCredentials: true,
   headers: {
     "bypass-tunnel-reminder": "true",
     Authorization: "Bearer " + process.env.NEXT_PUBLIC_API_TOKEN,

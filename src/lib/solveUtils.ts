@@ -1,5 +1,5 @@
-import { Problem } from "@/api/problem";
-import { Judge0Submission } from "@/api/submission";
+import { Problem } from "@/app/api/problem";
+import { Judge0Submission } from "@/app/api/submission";
 
 export const LANGUAGES = [
   { id: 54, name: "C++ (GCC 9.2.0)", value: "cpp" },
@@ -42,8 +42,8 @@ export function addMain(language: string, code: string, problem: Problem) {
           ? "True"
           : "true"
         : lang === "python"
-        ? "False"
-        : "false";
+          ? "False"
+          : "false";
     return String(val);
   }
 
@@ -190,8 +190,7 @@ export function getDefaultCode(language: string, problem: Problem): string {
           ? ["#include <vector>"]
           : []),
         "",
-        `${formatTypeForLang(fn.return.type, language)} ${
-          fn.name
+        `${formatTypeForLang(fn.return.type, language)} ${fn.name
         }(${fn.parameters
           .map((p) =>
             p.type.endsWith("[]")
@@ -205,8 +204,7 @@ export function getDefaultCode(language: string, problem: Problem): string {
       ].join("\n");
     case "java":
       return [
-        `public static ${formatTypeForLang(fn.return.type, language)} ${
-          fn.name
+        `public static ${formatTypeForLang(fn.return.type, language)} ${fn.name
         }(${fn.parameters
           .map((p) => `${formatTypeForLang(p.type, language)} ${p.name}`)
           .join(", ")}) {
@@ -273,8 +271,8 @@ export function formatValueForLang(
           ? "True"
           : "true"
         : language === "python"
-        ? "False"
-        : "false";
+          ? "False"
+          : "false";
     default:
       return val;
   }

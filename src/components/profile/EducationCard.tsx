@@ -1,5 +1,5 @@
 "use client"
-import { User } from "@/api/user";
+import { User } from "@/app/api/user";
 import CloseIcon from "@mui/icons-material/Close";
 import { Box, Card, IconButton, Typography } from "@mui/material";
 import { useState } from "react";
@@ -78,7 +78,7 @@ export default function EducationCard({ eduDrafts, setEduDrafts, edu, index, edi
         <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
           <Typography>Notes: </Typography>
           <InlineEdit
-            value={edu.notes}
+            value={edu.notes || ""}
             onChange={(v: string) => handleEduChange("notes", v)}
             editing={editEdu}
             label="Notes"

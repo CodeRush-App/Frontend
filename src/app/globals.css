@@ -59,13 +59,13 @@
   }
 }
 
-/* 
+/*
 Brand: #F62F63
 darkest: #0F172A
 dark: #27375E
 mid: #ABB8C9
 light: #E1E6EB
-lightest: #FFFFFF 
+lightest: #FFFFFF
 */
 :root {
   --radius: 0.625rem;

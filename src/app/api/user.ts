@@ -1,36 +1,49 @@
 import axiosInstance from "./axiosInstance";
 
+interface Education {
+  institution: string;
+  major: string;
+  degree: string;
+  start: string;
+  end: string;
+  gpa: number;
+  notes?: string;
+}
+
+interface WorkExperience {
+  position: string;
+  company: string;
+  start: string;
+  end: string;
+  location: string;
+  notes?: string;
+}
+
 export interface User {
   id?: string;
-  name: string;
+  name?: string;
   username: string;
   email?: string;
   password: string;
-  country: string;
-  phoneNumber: string;
+  country?: string;
+  phoneNumber?: string;
   skills: string[];
-  education: {
-    institution: string;
-    major: string;
-    degree: string;
-    start: string;
-    end: string;
-    gpa: number;
-    notes: string;
-  }[];
-  workExperience: {
-    position: string;
-    company: string;
-    start: string;
-    end: string;
-    location: string;
-    notes: string;
-  }[];
+  education: Education[];
+  workExperience: WorkExperience[];
   score?: number;
   elo?: number;
   isAdmin?: boolean;
   provider?: string;
   providerId?: string;
+}
+
+interface UserRegister {
+  name?: string;
+  username: string;
+  email: string;
+  password: string;
+  providerId?: string;
+  provider: string;
 }
 
 export interface UserScore {
@@ -50,6 +63,26 @@ export async function getUsers(): Promise<User[]> {
   const response = await axiosInstance.get(`/users`);
   return response.data;
 }
+
+export const registerUser = async (userData: UserRegister) => {
+  const response = await axiosInstance.post("/auth/register", userData);
+  return response.data;
+};
+
+export const loginUser = async (credentials: {
+  email: string;
+  password: string;
+}) => {
+  const response = await axiosInstance.post("/auth/login", credentials);
+  return response.data;
+};
+
+export const checkUserExists = async (email: string) => {
+  const response = await axiosInstance.get("/users/exists", {
+    params: { email }
+  });
+  return response.data;
+};
 
 export async function updateUser(user: User): Promise<User> {
   // Remove unallowed fields without creating variables

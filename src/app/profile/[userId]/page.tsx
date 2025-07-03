@@ -1,5 +1,5 @@
 "use client"
-import { getUser, updateUser, User } from "@/api/user";
+import { getUser, updateUser, User } from "@/app/api/user";
 import EducationCard from "@/components/profile/EducationCard";
 import PersonalInformationCard from "@/components/profile/PersonalInformationCard";
 import SkillsCard from "@/components/profile/SkillsCard";
@@ -56,7 +56,7 @@ export default function Profile() {
     updateUser(updatedUser);
   };
 
-  // Education Handlers  
+  // Education Handlers
   const handleEduAdd = () => {
     setEduDrafts([...eduDrafts, { institution: " ", major: " ", degree: " ", start: " ", end: " ", gpa: 0, notes: " " }]);
     setEditEdu(true);
@@ -76,7 +76,7 @@ export default function Profile() {
   };
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mb: "5vh" }}>
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mb: "5vh", width: "100%" }}>
       <Box sx={{ display: "flex", justifyContent: "space-between", gap: 2 }}>
         {/* Personal Info */}
         <PersonalInformationCard user={user} setUser={setUser} />

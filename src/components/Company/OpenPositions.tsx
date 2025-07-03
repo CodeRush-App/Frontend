@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { OpenPosition } from "@/api/company";
+import { OpenPosition } from "@/app/api/company";
 import { Box, Card, CardContent, Typography, Button, Divider, Stack, IconButton, Tooltip } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import CheckIcon from '@mui/icons-material/Check';
@@ -10,6 +10,7 @@ import InlineTextEdit from '../InlineTextEdit';
 type OpenPositionsProps = {
   positions: OpenPosition[];
   onChangePositions: (positions: OpenPosition[]) => void;
+  isManager: boolean;
 };
 
 const BLANK_POSITION: OpenPosition = {
@@ -19,7 +20,7 @@ const BLANK_POSITION: OpenPosition = {
   salary: " ",
 };
 
-export default function OpenPositions({ positions, onChangePositions }: OpenPositionsProps) {
+export default function OpenPositions({ positions, onChangePositions, isManager }: OpenPositionsProps) {
   const [editing, setEditing] = useState(false);
   const [localPositions, setLocalPositions] = useState<OpenPosition[]>(positions);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
@@ -46,10 +47,6 @@ export default function OpenPositions({ positions, onChangePositions }: OpenPosi
     onChangePositions(localPositions);
   };
 
-  const handleAdd = () => {
-    setLocalPositions([...localPositions, { ...BLANK_POSITION }]);
-  };
-
   return (
     <Box>
       <Box sx={{ display: "flex", alignItems: "center", mb: 2, gap: 2 }}>
@@ -57,13 +54,15 @@ export default function OpenPositions({ positions, onChangePositions }: OpenPosi
           Open positions
         </Typography>
         <Divider sx={{ flex: 1, borderColor: '#27375E', borderWidth: 1, borderRadius: 2 }} />
-        <IconButton color={editing ? "success" : "primary"} onClick={() => (editing ? handleSave() : setEditing(true))}>
-          {editing ? (
-            <CheckIcon fontSize="medium" />
-          ) : (
-            <EditIcon fontSize="medium" />
-          )}
-        </IconButton>
+        {isManager && (
+          <IconButton color={editing ? "success" : "primary"} onClick={() => (editing ? handleSave() : setEditing(true))}>
+            {editing ? (
+              <CheckIcon fontSize="medium" />
+            ) : (
+              <EditIcon fontSize="medium" />
+            )}
+          </IconButton>
+        )}
       </Box>
       {localPositions.length === 0 ? (
         <Typography color="text.secondary">No open positions.</Typography>
@@ -147,7 +146,7 @@ export default function OpenPositions({ positions, onChangePositions }: OpenPosi
       {editing && (
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <Tooltip title="Add new position">
-            <IconButton color="primary" onClick={handleAdd}>
+            <IconButton color="primary" onClick={() => setLocalPositions([...localPositions, { ...BLANK_POSITION }])}>
               <AddIcon fontSize="large" />
             </IconButton>
           </Tooltip>

@@ -1,5 +1,5 @@
-import { Problem } from "@/api/problem";
-import { Submission } from "@/api/submission";
+import { Problem } from "@/app/api/problem";
+import { Submission } from "@/app/api/submission";
 
 export function getProblemsSolved(problems: Problem[], submissions: Submission[], topic?: string): Problem[] {
   if (!topic || topic == "All") return problems.filter((problem) => isProblemSolved(problem, submissions));

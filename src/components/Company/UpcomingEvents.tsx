@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { UpcomingEvent } from "@/api/company";
+import { UpcomingEvent } from "@/app/api/company";
 import { Box, Card, CardContent, Typography, Button, Divider, Stack, IconButton, Tooltip } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import CheckIcon from '@mui/icons-material/Check';
@@ -10,6 +10,7 @@ import InlineTextEdit from '../InlineTextEdit';
 type UpcomingEventsProps = {
   events: UpcomingEvent[];
   onChangeEvents: (events: UpcomingEvent[]) => void;
+  isManager: boolean;
 };
 
 const BLANK_EVENT: UpcomingEvent = {
@@ -18,7 +19,7 @@ const BLANK_EVENT: UpcomingEvent = {
   name: " ",
 };
 
-export default function UpcomingEvents({ events, onChangeEvents }: UpcomingEventsProps) {
+export default function UpcomingEvents({ events, onChangeEvents, isManager }: UpcomingEventsProps) {
   const [editing, setEditing] = useState(false);
   const [localEvents, setLocalEvents] = useState<UpcomingEvent[]>(events);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
@@ -49,13 +50,15 @@ export default function UpcomingEvents({ events, onChangeEvents }: UpcomingEvent
           Upcoming events
         </Typography>
         <Divider sx={{ flex: 1, borderColor: '#27375E', borderWidth: 1, borderRadius: 2 }} />
-        <IconButton color={editing ? "success" : "primary"} onClick={() => (editing ? handleSave() : setEditing(true))}>
-          {editing ? (
-            <CheckIcon fontSize="medium" />
-          ) : (
-            <EditIcon fontSize="medium" />
-          )}
-        </IconButton>
+        {isManager && (
+          <IconButton color={editing ? "success" : "primary"} onClick={() => (editing ? handleSave() : setEditing(true))}>
+            {editing ? (
+              <CheckIcon fontSize="medium" />
+            ) : (
+              <EditIcon fontSize="medium" />
+            )}
+          </IconButton>
+        )}
       </Box>
       {localEvents.length === 0 ? (
         <Typography color="text.secondary">No upcoming events.</Typography>

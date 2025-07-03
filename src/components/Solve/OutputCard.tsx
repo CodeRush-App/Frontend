@@ -1,5 +1,5 @@
-import { Problem } from "@/api/problem";
-import { Judge0Submission } from "@/api/submission";
+import { Problem } from "@/app/api/problem";
+import { Judge0Submission } from "@/app/api/submission";
 import { brandColors } from "@/app/theme";
 import { Box, Card, CardContent, Divider, Typography } from "@mui/material";
 import { useState } from "react";
@@ -8,7 +8,7 @@ import { parseStdout } from "@/lib/solveUtils";
 export default function OutputCard({ testResults, problem, loading }: { testResults: Judge0Submission | null; problem: Problem; loading?: boolean }) {
   const [expanded, setExpanded] = useState<number | null>(null);
 
-  if (!testResults || !problem?.testCases) return <></>;
+  if (!testResults || !problem?.testCases) return null;
 
   const stdoutMap = parseStdout(testResults.stdout!, problem);
 

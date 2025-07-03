@@ -1,14 +1,24 @@
 "use client"
 import React, { useEffect, useState } from "react";
 import { Box, Typography, Button, Avatar, Stack, CircularProgress, Divider } from "@mui/material";
-import { getCompanies, Company } from "@/api/company";
+import { getCompanies, Company } from "@/app/api/company";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function GetHired() {
   const [companies, setCompanies] = useState<Company[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { status } = useSession();
+  const router = useRouter();
 
   useEffect(() => {
+    if (status === "unauthenticated") router.push("/login");
+  }, [status, router]);
+
+  useEffect(() => {
+    if (status !== "authenticated") return;
+
     getCompanies()
       .then(data => {
         setCompanies(data);
@@ -18,10 +28,12 @@ export default function GetHired() {
         setError("Failed to load companies");
         setLoading(false);
       });
-  }, []);
+  }, [status]);
+
+  if (status === "loading" || status === "unauthenticated") return null;
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 4, width: "100%" }}>
       <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 2 }}>
         <Typography color="text.primary" sx={{ fontWeight: "bold", fontSize: 24 }}>
           Registered companies
