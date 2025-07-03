@@ -1,5 +1,5 @@
 "use client"
-import { Button, Menu, MenuItem } from "@mui/material";
+import { IconButton, Menu, MenuItem } from "@mui/material";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -29,9 +29,9 @@ export default function ProfileButton({ userId }: { userId: string }) {
 
     return (
         <>
-            <Button onClick={handleClick}>
+            <IconButton onClick={handleClick}>
                 <AccountCircleIcon fontSize="large" />
-            </Button>
+            </IconButton>
             <Menu open={!!anchorEl} anchorEl={anchorEl} onClose={handleClose} sx={{ mt: 2 }}>
                 <MenuItem onClick={handleProfileClick}>
                     Profile

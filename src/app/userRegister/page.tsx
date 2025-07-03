@@ -73,13 +73,13 @@ export default function UserRegister() {
 
         <Box sx={{ alignSelf: "flex-start", fontSize: 32, fontWeight: "bold" }}>Sign up</Box>
 
-        <TextField type="text" id="Username" label="Username" variant="outlined" sx={{ width: "100%", mt: 4 }} onChange={(e) => setUsername(e.target.value)} />
+        <TextField type="text" id="Username" label="Username" variant="outlined" sx={{ width: "100%", mt: 4 }} value={username} onChange={(e) => setUsername(e.target.value)} />
 
-        <TextField type="email" id="Email" label="E-Mail" variant="outlined" sx={{ width: "100%", mt: 2 }} onChange={(e) => setEmail(e.target.value)} />
+        <TextField type="email" id="Email" label="E-Mail" variant="outlined" sx={{ width: "100%", mt: 2 }} value={email} onChange={(e) => setEmail(e.target.value)} />
 
-        <TextField type="password" id="Password" label="Password" variant="outlined" sx={{ width: "100%", mt: 2 }} onChange={(e) => setPassword(e.target.value)} />
+        <TextField type="password" id="Password" label="Password" variant="outlined" sx={{ width: "100%", mt: 2 }} value={password} onChange={(e) => setPassword(e.target.value)} />
 
-        <TextField type="password" id="ConfirmPassword" label="Confirm Password" variant="outlined" sx={{ width: "100%", mt: 2 }} onChange={(e) => setConfirmPassword(e.target.value)} />
+        <TextField type="password" id="ConfirmPassword" label="Confirm Password" variant="outlined" sx={{ width: "100%", mt: 2 }} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
 
         {/* Error message shown above the conditions checkbox */}
         {error && <Box sx={{ color: "red", alignSelf: "flex-start", mt: 1 }}>{error}</Box>}

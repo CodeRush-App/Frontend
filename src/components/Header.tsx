@@ -1,5 +1,5 @@
 "use client"
-import { AppBar, Box, Button, TextField, Toolbar } from "@mui/material";
+import { AppBar, Box, IconButton, Button, TextField, Toolbar } from "@mui/material";
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Image from "next/image";
 import logo from "../../public/logo.png";
@@ -54,9 +54,9 @@ export default function Header() {
           {isLoggedIn && (
             <>
               <TextField type="text" id="search" label="Search" variant="outlined" size="small" sx={{ width: "200px" }} />
-              <Button>
+              <IconButton>
                 <NotificationsIcon />
-              </Button>
+              </IconButton>
               <ProfileButton userId={session.user.id} />
             </>)}
           {!isLoggedIn && (<>

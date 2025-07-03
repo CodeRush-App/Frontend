@@ -72,7 +72,7 @@ function CompanyCard({ company }: { company: Company }) {
             Open positions
           </Typography>
           <Typography variant="body2" color="text.primary" sx={{ fontWeight: "bold", fontSize: 15 }}>
-            {company.openPositions!.length}
+            {company.openPositions.length}
           </Typography>
         </Box>
         <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>

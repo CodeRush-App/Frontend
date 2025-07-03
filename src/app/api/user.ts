@@ -1,6 +1,6 @@
 import axiosInstance from "./axiosInstance";
 
-interface education {
+interface Education {
   institution: string;
   major: string;
   degree: string;
@@ -10,7 +10,7 @@ interface education {
   notes?: string;
 }
 
-interface workExperience {
+interface WorkExperience {
   position: string;
   company: string;
   start: string;
@@ -28,8 +28,8 @@ export interface User {
   country?: string;
   phoneNumber?: string;
   skills: string[];
-  education: education[];
-  workExperience: workExperience[];
+  education: Education[];
+  workExperience: WorkExperience[];
   score?: number;
   elo?: number;
   isAdmin?: boolean;

@@ -39,7 +39,7 @@ export default function LoginSelection() {
           <Button variant="contained" color="primary" sx={{ mt: 4, mb: 10 }} href="/login">
             Login
           </Button>
-          Dont have an account? <Link color="primary" style={{ textDecoration: "underline" }} href="/companyRegister">Request access</Link>
+          Don&apos;t have an account? <Link color="primary" style={{ textDecoration: "underline" }} href="/companyRegister">Request access</Link>
         </Box>
       </Box>
     </Box>
