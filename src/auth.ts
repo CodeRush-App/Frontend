@@ -69,7 +69,7 @@ export const authOptions: NextAuthConfig = {
         }),
         GitHub,
         Google
-    ],
+    ], 
     pages: {
         signIn: '/login',
         signOut: '/logout',

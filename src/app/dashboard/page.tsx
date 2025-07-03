@@ -54,7 +54,7 @@ export default function Dashboard() {
   if (status === "loading" || status === "unauthenticated") return null;
 
   return (
-    <Box sx={{ mb: "5vh", width: "100%" }}>
+    <Box id="dashboard-box" sx={{ mb: "5vh", width: "100%" }}>
       {/* Top row */}
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Box>
