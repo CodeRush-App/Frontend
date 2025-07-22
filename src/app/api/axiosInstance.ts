@@ -1,23 +1,22 @@
 import axios from "axios";
 
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api/v1";
-
 export const JUDGE0_URL = process.env.NEXT_PUBLIC_JUDGE0_URL || "";
-const JUDGE0_HEADERS = {
+export const JUDGE0_HEADERS = {
   "Content-Type": "application/json",
   "X-RapidAPI-Key": process.env.NEXT_PUBLIC_JUDGE0_KEY || "",
   "X-RapidAPI-Host": process.env.NEXT_PUBLIC_JUDGE0_HOST || "",
 };
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api/v1";
+
+const headers: Record<string, string> = {};
+if (process.env.NEXT_PUBLIC_API_TOKEN)
+  headers["Authorization"] = "Bearer " + process.env.NEXT_PUBLIC_API_TOKEN;
 
 const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
   withCredentials: true,
-  headers: {
-    "bypass-tunnel-reminder": "true",
-    Authorization: "Bearer " + process.env.NEXT_PUBLIC_API_TOKEN,
-    ...JUDGE0_HEADERS,
-  },
+  headers,
 });
 
 axiosInstance.interceptors.response.use(

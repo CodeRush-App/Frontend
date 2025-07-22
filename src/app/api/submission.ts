@@ -1,4 +1,4 @@
-import axiosInstance, { JUDGE0_URL } from "./axiosInstance";
+import axiosInstance, { JUDGE0_URL, JUDGE0_HEADERS } from "./axiosInstance";
 
 export interface Submission {
   id?: string;
@@ -74,11 +74,15 @@ export async function getSubmissionsForProblem(
 export async function sendJudge0Submission(
   submission: Judge0Submission
 ): Promise<string> {
-  const res = await axiosInstance.post(JUDGE0_URL + "/submissions", submission);
+  const res = await axiosInstance.post(JUDGE0_URL + "/submissions", submission, {
+    headers: JUDGE0_HEADERS,
+  });
   return res.data.token;
 }
 
 export async function getJudge0Result(token: string): Promise<Judge0Submission> {
-  const res = await axiosInstance.get(JUDGE0_URL + "/submissions/" + token);
+  const res = await axiosInstance.get(JUDGE0_URL + "/submissions/" + token, {
+    headers: JUDGE0_HEADERS,
+  });
   return res.data;
 }
