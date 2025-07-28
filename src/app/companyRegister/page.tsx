@@ -2,7 +2,7 @@
 import { Box, Button, Checkbox, Paper, TextField } from "@mui/material";
 import { useState } from "react"
 import { ShineBorder } from "@/components/magicui/shine-border";
-import { registerCompany } from "../api/company";
+import { registerCompany } from "@/app/api/company";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 

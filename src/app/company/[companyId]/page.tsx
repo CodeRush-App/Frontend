@@ -3,9 +3,9 @@ import { getCompany, updateCompany } from "@/app/api/company";
 import type { Company, OpenPosition, UpcomingEvent } from "@/app/api/company";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import CompanyHeader from "../../../components/Company/CompanyHeader";
-import OpenPositions from "../../../components/Company/OpenPositions";
-import UpcomingEvents from "../../../components/Company/UpcomingEvents";
+import CompanyHeader from "@/components/Company/CompanyHeader";
+import OpenPositions from "@/components/Company/OpenPositions";
+import UpcomingEvents from "@/components/Company/UpcomingEvents";
 import { Box, Typography } from "@mui/material";
 import { useSession } from "next-auth/react";
 
