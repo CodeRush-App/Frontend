@@ -23,7 +23,14 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    console.error("API Error:", error);
+    const status = error.response?.status;
+    if (!error.response || status >= 500) {
+      console.error("API Error:", error);
+    } else {
+      console.warn(
+        `API Error: ${error.config?.method?.toUpperCase()} ${error.config?.url} -> ${status}`
+      );
+    }
 
     let userMessage = "An unexpected error occurred.";
     if (error.response) {

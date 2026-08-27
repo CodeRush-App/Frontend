@@ -14,11 +14,29 @@ interface CustomJwtPayload extends jwt.JwtPayload {
     isAdmin?: boolean;
 }
 
+const cookieDomain = process.env.AUTH_COOKIE_DOMAIN || undefined;
+const useSecureCookies = process.env.NODE_ENV === "production" || process.env.AUTH_URL?.startsWith("https://");
+const cookiePrefix = useSecureCookies ? "__Secure-" : "";
+const sameSite = process.env.COOKIE_SAMESITE || "lax"
+
 export const authOptions: NextAuthConfig = {
     secret: process.env.AUTH_SECRET,
+    trustHost: true,
     session: {
         strategy: "jwt",
         maxAge: 30 * 24 * 60 * 60, // 30 days
+    },
+    cookies: {
+        sessionToken: {
+            name: `${cookiePrefix}authjs.session-token`,
+            options: {
+                httpOnly: true,
+                path: "/",
+                secure: useSecureCookies,
+                sameSite: sameSite as "lax" | "strict" | "none",
+                domain: cookieDomain,
+            },
+        },
     },
     providers: [
         Credentials({
@@ -62,7 +80,15 @@ export const authOptions: NextAuthConfig = {
                         isAdmin: loginResponse.user.isAdmin || false,
                     };
                 } catch (error) {
-                    console.error("Error during authorization:", error);
+                    const isExpectedAuthFailure =
+                        error instanceof AxiosError &&
+                        error.response?.status !== undefined &&
+                        error.response.status >= 400 &&
+                        error.response.status < 500;
+
+                    if (!isExpectedAuthFailure) {
+                        console.error("Error during authorization:", error);
+                    }
                     return null;
                 }
             }
@@ -148,7 +174,7 @@ export const authOptions: NextAuthConfig = {
     },
     jwt: {
         encode: async ({ secret, token }) => {
-            if (!secret) return "";
+            if (!secret || !token) return "";
 
             return jwt.sign({ id: token?.id, isAdmin: token?.isAdmin, name: token?.name, email: token?.email }, secret as jwt.Secret, {
                 algorithm: "HS256",
@@ -156,10 +182,9 @@ export const authOptions: NextAuthConfig = {
             })
         },
         decode: async ({ secret, token }) => {
-            if (!secret) {
-                return null;
-            }
-            const payload = jwt.verify(token!, secret as jwt.Secret, { algorithms: ["HS256"] }) as jwt.JwtPayload;
+            if (!secret || !token) return null;
+
+            const payload = jwt.verify(token, secret as jwt.Secret, { algorithms: ["HS256"] }) as jwt.JwtPayload;
             const customPayload = payload as CustomJwtPayload;
             return {
                 ...customPayload,
@@ -167,7 +192,7 @@ export const authOptions: NextAuthConfig = {
                 isAdmin: customPayload.isAdmin ?? false,
             } as JWT;
         },
-    }
+    },
 };
 
 export const { handlers, signIn, signOut, auth } = NextAuth(authOptions);
