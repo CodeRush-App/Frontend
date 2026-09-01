@@ -21,11 +21,16 @@ export default function UserLogin() {
     }
 
     setLoginError(false);
-    await signIn("credentials", {
+    const result = await signIn("credentials", {
       email: email.trim(),
       password: password.trim(),
       redirect: false,
     });
+
+    if (result?.error) {
+      setLoginError(true);
+      return;
+    }
 
     router.push("/dashboard")
   };
