@@ -6,6 +6,7 @@ import type { JWT } from 'next-auth/jwt';
 import type { Session, User } from 'next-auth';
 import { AxiosError } from 'axios';
 import jwt from 'jsonwebtoken';
+import crypto from 'crypto';
 import { checkUserExists, loginUser, registerUser } from '@/app/api/user';
 
 interface CustomJwtPayload extends jwt.JwtPayload {
@@ -143,7 +144,8 @@ export const authOptions: NextAuthConfig = {
                         name: name,
                         username: email?.split('@')[0] || `oauth_${oauthId}`,
                         email,
-                        password: oauthId,
+                        // Use cryptographically random password as backend requires a password
+                        password: crypto.randomBytes(32).toString('hex'),
                         providerId: oauthId,
                         provider: account?.provider || "OAuth",
                     });
